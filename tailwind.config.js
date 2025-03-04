@@ -11,9 +11,46 @@ export default {
     ],
     theme: {
         extend: {
+            backgroundImage: {
+                'custom-pattern': "url('../images/hollowed-boxes.png')",
+              },
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Roboto slab','Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                madera: {
+                  claro: '#8d6e63',
+                  medio: '#6d4c41', 
+                  oscuro: '#4e342e', 
+                  profundo: '#3e2723',
+                },
+                verde: {
+                    claro: '#8fbc8f',
+                    medio: '#199447', 
+                    oscuro: '#638263', 
+                    profundo: '#213821', 
+                  },
+                  amarillo: {
+                    claro: '#fade32',
+                    medio: '#E9CC1B', 
+                    oscuro: '#273B09', 
+                    profundo: '#002400', 
+                  },
+                  gris: {
+                    claro: '#F2EFE9',
+                    medio: '#564E58', 
+                    oscuro: '#403D39', 
+                    profundo: '#252422', 
+                  },
+                  naranja: {
+                    claro: '#fade32',
+                    medio: '#FF7F11', 
+                    oscuro: '#EB5E28', 
+                    profundo: '#FF7300', 
+                  },
+                  arena:"#EDCBB1",
+                
+            }
         },
     },
     plugins: [],

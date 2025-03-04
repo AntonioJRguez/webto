@@ -45,4 +45,16 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function sessions()
+    {
+        return $this->hasMany(Session::class);
+    }
+    public function plot(){
+        return $this->belongsTo(Plot::class);
+    }
+    public function events()
+    {
+        return $this->belongsToMany(Event::class);
+    }
+    
 }
