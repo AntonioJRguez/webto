@@ -1,3 +1,5 @@
+import '../css/app.css';
+
 window.showDialog = function(name){
 let dialog = document.getElementById(name);
 dialog.classList.remove('hidden');
