@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('description');
             $table->boolean('assigned')->default(false);
             $table->timestamp('fertilization_date')->nullable();
+            $table->string('plot_code')->unique();
             $table->timestamps();
         });
     }

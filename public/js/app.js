@@ -1,8 +1,8 @@
-window.showDialog = function(name){
+function showDialog(name){
 let dialog = document.getElementById(name);
 dialog.classList.remove('hidden');
 }
-window.hideDialog = function(name){
+function hideDialog(name){
     let dialog = document.getElementById(name);
     dialog.classList.add('hidden');
 }

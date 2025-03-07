@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Plot extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'description'];
+    protected $fillable = ['name', 'description','plot_code'];
 
     public function tasks() {
         return $this->hasMany(Task::class);
     }
     public function users() {
-        return $this->hasMany(User::class);
+        return $this->hasMany(User::class, 'plot_code');
     }
     
 }
