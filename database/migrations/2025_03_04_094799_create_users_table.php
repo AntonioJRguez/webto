@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('registration_date')->nullable();
             $table->string('password');
-            $table->boolean('is_admin')->default(false);
+            $table->boolean('is_admin')->nullable();
             $table->rememberToken();
             $table->string('phone_number')->nullable();
             $table->string('plot_code');  // Asegúrate de que sea un string

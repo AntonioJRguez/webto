@@ -10,7 +10,7 @@
     @vite('resources/css/app.css')
 </head>
 
-<body class="bg-custom bg-repeat">
+<body class="circle-pattern">
     <!-- Barra de navegación -->
     <nav class="fixed top-0 left-0 w-full bg-gradient-to-r from-green-700 via-green-500 to-yellow-400 shadow-md z-50 ">
         <div class="container mx-auto flex items-center justify-between px-4 py-3 ">
@@ -180,6 +180,8 @@
         
     </main>
 
-</body>
+    @yield('content')
 
+</body>
+@vite(['resources/js/app.js'])
 </html>

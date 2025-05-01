@@ -1,4 +1,4 @@
-@extends('layouts.app-register')
+@extends('layouts.app-basic')
 @section('content')
     <!-- Contenido para probar el scroll -->
 

@@ -9,16 +9,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
     @vite('resources/css/app.css')
     {{-- <script src="{{ asset('js/script.js') }}"></script> --}}
-
+    {{-- <script>
+        window.routeTemplate = @json(route('admin.update.user', ':id'));
+    </script> --}}
 
 </head>
 
 <body class="circle-pattern">
-    <div  z-50 bg-verde-claro">
+    <div class="z-50 bg-verde-claro">
         <!-- Header de la página -->
-        <header class="top-0 left-0 w-full h-[420px]  ">
+        <header class="top-0 left-0 w-full h-[120px]  ">
             <div class="container mx-auto flex items-center justify-center px-4 py-2 belittle">
-                <a href="{{route('index')}}"><img src="{{ asset('images/webtologo.png') }}" alt="Logo" class="h-[400px]"></a>
+                <a href="{{route('index')}}"><img src="{{ asset('images/webtologo.png') }}" alt="Logo" class="h-[100px]"></a>
             </div>
         </header>
     </div>

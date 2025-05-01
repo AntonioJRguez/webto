@@ -1,10 +1,34 @@
 import '../css/app.css';
 
-window.showDialog = function(name){
+
+
+window.toggleDialog = function(name){
 let dialog = document.getElementById(name);
-dialog.classList.remove('hidden');
+dialog.classList.toggle('hidden');
 }
-window.hideDialog = function(name){
-    let dialog = document.getElementById(name);
-    dialog.classList.add('hidden');
+// window.hideDialog = function(name){
+//     let dialog = document.getElementById(name);
+//     dialog.classList.add('hidden');
+// }
+
+
+window.openEditUserModal = function(id, name, email, plot, isAdmin) {
+    var url = window.routeTemplate.replace(':id', id);
+    var form=document.getElementById('editUserForm')
+    form.action = url;
+
+    
+
+    document.getElementById("name").value = name;
+    document.getElementById("email").value = email;
+    document.getElementById("plot_name").value = plot;
+    document.getElementById("is_admin").value = isAdmin;
+    document.getElementById("new_password").value = "";
+    document.getElementById("confirm_password").value = "";
+    // Mostrar el modal
+    showDialog("modal-admin-users");
+    form.addEventListener('submit',function(event){
+        console.log("LE has dado a submit");
+        showDialog("modal-admin-users");
+    })
 }

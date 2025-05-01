@@ -28,4 +28,37 @@
             <section class="text-sm"> <a href="{{route('register')}}">¿No tienes cuenta? Regístrate.</a></section>
         </x-slot>
     </x-modal>
+    <x-modal>
+        <x-slot name="modalTitle">
+            <x-slot name="id">
+                modal-admin
+            </x-slot>
+        Iniciar sesión como administrador
+        </x-slot>
+        <x-slot name="modalMain">
+            @if(session('error'))
+            <div class="bg-red-500 text-white p-3 rounded mb-4 text-center">
+                {{ session('error') }}
+            </div>
+        @endif
+
+        <form action="{{ route('loginAdmin') }}" method="POST">
+            @csrf
+            <div class="mb-4">
+                <label for="email" class="block text-gray-700">Correo Electrónico</label>
+                <input type="email" name="email" id="email" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+
+            <div class="mb-4">
+                <label for="password" class="block text-gray-700">Contraseña</label>
+                <input type="password" name="password" id="password" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+
+            <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                Iniciar Sesión
+            </button>
+        </form>
+        </x-slot>
+    </x-modal>
+    
 @endsection

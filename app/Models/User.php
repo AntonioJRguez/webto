@@ -42,7 +42,6 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
     }
@@ -52,7 +51,7 @@ class User extends Authenticatable
     }
     public function plot()
     {
-        return $this->belongsTo(Plot::class, 'plot_code');
+        return $this->belongsTo(Plot::class, 'plot_code', 'plot_code');
     }
     public function events()
     {

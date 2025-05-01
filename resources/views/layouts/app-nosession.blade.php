@@ -37,8 +37,11 @@
                 <li><a href="#comunidad" class="hover:text-gray-300">Comunidad</a></li>
                 <li><a href="#contacto" class="hover:text-gray-300">Contacto</a></li>
                 <li>
-                    <button onclick="showDialog('modal-login')" class="bg-green-700 text-white px-4 py-3 rounded hover:bg-green-600">
+                    <button onclick="toggleDialog('modal-login')" class="bg-green-700 text-white px-4 py-3 rounded hover:bg-green-600">
                         Iniciar Sesión
+                    </button>
+                    <button onclick="toggleDialog('modal-admin')" class="bg-verde-oscuro text-white px-4 py-3 rounded hover:bg-green-600">
+                        Administrador
                     </button>
                 </li>
             </ul>

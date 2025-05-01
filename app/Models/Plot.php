@@ -14,7 +14,7 @@ class Plot extends Model
         return $this->hasMany(Task::class);
     }
     public function users() {
-        return $this->hasMany(User::class, 'plot_code');
+        return $this->hasMany(User::class, 'plot_code', 'plot_code');
     }
     
 }
