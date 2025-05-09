@@ -9,23 +9,20 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ControlPanelController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/register', [RegisterController::class, 'showForm'])->name('register.form');
 Route::post('/registrarse', [RegisterController::class, 'register'])->name('register');
 
-Route::get('/', function () {
-    if (Auth::check()) {
-        return view('index-session');
-    } else {
-        return view('index');
-    }
-})->name('index');
-
-Route::get('/inicio', function () {
-    return view('index-session');
-});
+// Route::get('/', function () {
+//     if (Auth::check()) {
+//         return view('index-session');
+//     } else {
+//         return view('index');
+//     }
+// })->name('index');
 
 
 Route::get('/registrarse', function () {
@@ -34,6 +31,7 @@ Route::get('/registrarse', function () {
 })->name('register');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/loginAdmin', [LoginController::class, 'logInAdmin'])->name('loginAdmin');
+Route::post('/loginUser', [LoginController::class, 'logInUser'])->name('loginUser');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/admin', [ControlPanelController::class, 'showControlPanel'])->name('admin');
@@ -61,13 +59,8 @@ Route::get('/admin/event/{event}', [ControlPanelController::class, 'showControlP
 Route::put('/admin/event/{event}', [ControlPanelController::class, 'UpdateEvent'])->name('admin.update.event');
 Route::delete('/admin/event/{event}', [ControlPanelController::class, 'DestroyEvent'])->name('admin.delete.event');
 
-// Route::put('/admin/user/{user}', [ControlPanelController::class, 'UpdateUser'])->name('admin.update.user');
-// Route::delete('/admin/user/{user}', [ControlPanelController::class,'DestroyUser'])->name('admin.delete.user');
+Route::get('/', [HomeController::class, 'showIndex'])->name('index');
 
-Route::get('/myplot', function () {
-    if (Auth::check()) {
-    return view('myplot');
-    }else{
-        return view('index');
-    }
-})->name('myplot');
+Route::get('/myplot', [HomeController::class, 'showMyPlot'])->name('myplot');
+
+Route::get('/events', [HomeController::class, 'showEvents'])->name('events');

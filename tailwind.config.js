@@ -31,9 +31,9 @@ export default {
           profundo: '#213821',
         },
         amarillo: {
-          claro: '#fade32',
+          claro: '#fef2a5',
           medio: '#E9CC1B',
-          oscuro: '#273B09',
+          oscuro: '#fcc63f',
           profundo: '#002400',
         },
         gris: {

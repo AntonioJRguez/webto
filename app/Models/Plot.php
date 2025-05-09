@@ -16,5 +16,8 @@ class Plot extends Model
     public function users() {
         return $this->hasMany(User::class, 'plot_code', 'plot_code');
     }
+    public function crops() {
+        return $this->hasMany(Crop::class);
+    }
     
 }

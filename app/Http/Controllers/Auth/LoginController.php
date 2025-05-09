@@ -29,12 +29,19 @@ class LoginController extends Controller
 
         return back()->withErrors(['error' => 'Credenciales incorrectas.']);
     }
-    public function logIn()
+    public function logInUser(Request $request)
     {
-        if (Auth::check()) {
-            return view('index');
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+                return redirect()->route('index'); // Redirigir al index
         }
-        return redirect()->route('index')->withErrors(['error' => 'Acceso no autorizado']);
+
+        return back()->withErrors(['error' => 'Credenciales incorrectas.']);
     }
     public function logout(Request $request)
     {

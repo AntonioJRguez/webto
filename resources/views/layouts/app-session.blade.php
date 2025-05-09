@@ -23,7 +23,7 @@
             <ul class="flex space-x-7 text-gray-700 font-medium ">
                 <li><a href={{route('index')}} class="hover:text-gray-300">Inicio</a></li>
                 <li><a href={{route('myplot')}} class="hover:text-gray-300">Mi parcela</a></li>
-                <li><a href="#comunidad" class="hover:text-gray-300">Eventos</a></li>
+                <li><a href="{{route('events')}}" class="hover:text-gray-300">Eventos</a></li>
                 <li><a href="#comunidad" class="hover:text-gray-300">Calendario</a></li>
                 <li><a href="#contacto" class="hover:text-gray-300">Contacto</a></li>
                 <li>

@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+
 use Carbon\Carbon;
 
 use App\Models\Event;
@@ -50,5 +51,49 @@ class DatabaseSeeder extends Seeder
             'location' => 'ciudad real',
             'capacity' => 5,
         ]);
+        Event::factory()->create([
+            'name' => 'evento 2 de prueba',
+            'description' => 'esto es un evento de prueba',
+            'event_date' => Carbon::now(),
+            'location' => 'ciudad real',
+            'capacity' => 5,
+        ]);
+        Event::factory()->create([
+            'name' => 'evento 3 de prueba',
+            'description' => 'esto es un evento 2 de prueba',
+            'event_date' => Carbon::now(),
+            'location' => 'ciudad real',
+            'capacity' => 5,
+        ]);
+        Event::factory()->create([
+            'name' => 'evento 4 de prueba',
+            'description' => 'esto es un evento 2 de prueba',
+            'event_date' => Carbon::now(),
+            'location' => 'ciudad real',
+            'capacity' => 5,
+        ]);
+        Event::factory()->create([
+            'name' => 'evento 5 de prueba',
+            'description' => 'esto es un evento 2 de prueba',
+            'event_date' => Carbon::now(),
+            'location' => 'ciudad real',
+            'capacity' => 5,
+        ]);
+        Event::factory()->create([
+            'name' => 'evento 6  de prueba',
+            'description' => 'esto es un evento 2 de prueba',
+            'event_date' => Carbon::now(),
+            'location' => 'ciudad real',
+            'capacity' => 5,
+        ]);
+        Event::factory()->create([
+            'name' => 'evento 7 de prueba',
+            'description' => 'esto es un evento 2 de prueba',
+            'event_date' => Carbon::now(),
+            'location' => 'ciudad real',
+            'capacity' => 5,
+        ]);
+        $user = User::find(1);
+        $user->events()->attach(1);
     }
 }
