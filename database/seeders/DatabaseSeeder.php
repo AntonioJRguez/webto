@@ -6,6 +6,7 @@ use Carbon\Carbon;
 
 use App\Models\Event;
 use App\Models\Plot;
+use App\Models\Task;
 use App\Models\User;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -47,15 +48,17 @@ class DatabaseSeeder extends Seeder
         Event::factory()->create([
             'name' => 'evento de prueba',
             'description' => 'esto es un evento de prueba',
-            'event_date' => Carbon::now(),
+            'event_date' => Carbon::parse('2025-05-23'),
             'location' => 'ciudad real',
+            'duration' => '01:00',
             'capacity' => 5,
         ]);
         Event::factory()->create([
-            'name' => 'evento 2 de prueba',
-            'description' => 'esto es un evento de prueba',
-            'event_date' => Carbon::now(),
+            'name' => 'evento 2aaaaaaaaaaaa de prueba',
+            'description' => 'esto es un evento de prueba y no deberia salir',
+            'event_date' => Carbon::yesterday(),
             'location' => 'ciudad real',
+            'duration' => '01:00',
             'capacity' => 5,
         ]);
         Event::factory()->create([
@@ -63,6 +66,7 @@ class DatabaseSeeder extends Seeder
             'description' => 'esto es un evento 2 de prueba',
             'event_date' => Carbon::now(),
             'location' => 'ciudad real',
+            'duration' => '01:00',
             'capacity' => 5,
         ]);
         Event::factory()->create([
@@ -70,6 +74,7 @@ class DatabaseSeeder extends Seeder
             'description' => 'esto es un evento 2 de prueba',
             'event_date' => Carbon::now(),
             'location' => 'ciudad real',
+            'duration' => '01:00',
             'capacity' => 5,
         ]);
         Event::factory()->create([
@@ -77,6 +82,7 @@ class DatabaseSeeder extends Seeder
             'description' => 'esto es un evento 2 de prueba',
             'event_date' => Carbon::now(),
             'location' => 'ciudad real',
+            'duration' => '01:00',
             'capacity' => 5,
         ]);
         Event::factory()->create([
@@ -84,6 +90,7 @@ class DatabaseSeeder extends Seeder
             'description' => 'esto es un evento 2 de prueba',
             'event_date' => Carbon::now(),
             'location' => 'ciudad real',
+            'duration' => '01:00',
             'capacity' => 5,
         ]);
         Event::factory()->create([
@@ -91,7 +98,63 @@ class DatabaseSeeder extends Seeder
             'description' => 'esto es un evento 2 de prueba',
             'event_date' => Carbon::now(),
             'location' => 'ciudad real',
+            'duration' => '01:00',
             'capacity' => 5,
+        ]);
+
+        Task::factory()->create([
+            'task_name' => 'tarea 7 de prueba',
+            'plot_id' => '1',
+            'description' => 'descripciondescripciondescripciondescripciondescripciondescripciondescripciondescripciondescripcion',
+            'limit_date' => Carbon::tomorrow(),
+        ]);
+        Task::factory()->create([
+            'task_name' => 'tarea asdf de prueba',
+            'plot_id' => '1',
+            'description' => 'descripciondescripciondescripciondescripciondescripciondescripciondescripciondescripciondescripcion',
+            'limit_date' => Carbon::tomorrow(),
+        ]);
+        Task::factory()->create([
+            'task_name' => 'tarea rrrr de prueba',
+            'plot_id' => '1',
+            'description' => 'descripciondescripciondescripciondescripciondescripciondescripciondescripciondescripciondescripcion',
+            'limit_date' => Carbon::tomorrow(),
+        ]);
+        Task::factory()->create([
+            'task_name' => 'tarea aaa de prueba',
+            'plot_id' => '1',
+            'description' => 'descripciondescripciondescripciondescripciondescripciondescripciondescripciondescripciondescripcion',
+            'limit_date' => Carbon::tomorrow(),
+        ]);
+        Task::factory()->create([
+            'task_name' => 'tarea pa hoy7 de prueba',
+            'plot_id' => '1',
+            'description' => 'descripciondescripciondescripciondescripciondescripciondescripciondescripciondescripciondescripcion',
+            'limit_date' => Carbon::today(),
+        ]);
+        Task::factory()->create([
+            'task_name' => 'tarea para hoy de prueba',
+            'plot_id' => '1',
+            'description' => 'descripciondescripciondescripciondescripciondescripciondescripciondescripciondescripciondescripcion',
+            'limit_date' => Carbon::today(),
+        ]);
+        Task::factory()->create([
+            'task_name' => 'tarea pa hoy de prueba',
+            'plot_id' => '1',
+            'description' => 'descripciondescripciondescripciondescripciondescripciondescripciondescripciondescripciondescripcion',
+            'limit_date' => Carbon::today(),
+        ]);
+        Task::factory()->create([
+            'task_name' => 'tarea para ayer de prueba',
+            'plot_id' => '1',
+            'description' => 'descripciondescripciondescripciondescripciondescripciondescripciondescripciondescripciondescripcion',
+            'limit_date' => Carbon::yesterday(),
+        ]);
+        Task::factory()->create([
+            'task_name' => 'tarea pa ayer de prueba',
+            'plot_id' => '1',
+            'description' => 'descripciondescripciondescripciondescripciondescripciondescripciondescripciondescripciondescripcion',
+            'limit_date' => Carbon::yesterday(),
         ]);
         $user = User::find(1);
         $user->events()->attach(1);

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('task_name');
             // $table->unsignedBigInteger('plot_id');
             $table->foreignId('plot_id')->constrained()->onDelete('cascade');
+            $table->string('description');
             $table->datetime('limit_date')->nullable();
             $table->timestamp('completed_date')->nullable();
             $table->string('status')->default('unrealized');

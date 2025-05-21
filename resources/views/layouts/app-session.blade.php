@@ -17,7 +17,7 @@
 
             <!-- Logo -->
             <a href="#" class="flex items-center space-x-2">
-                <img src="{{ asset('images/webtologo3.png') }}" alt="Logo" class="h-10 ">
+                <img src="{{ asset('images/webtologo.png') }}" alt="Logo" class="h-10 ">
             </a>
             <!-- Menú -->
             <ul class="flex space-x-7 text-gray-700 font-medium ">

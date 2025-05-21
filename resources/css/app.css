@@ -2,6 +2,160 @@
 @tailwind components;
 @tailwind utilities;
 
+.btn {
+ padding: 0.5em;
+ margin: 0.5em;
+ background: black;
+ color: white;
+ border: none;
+ border-radius: 0.625em;
+ font-size: 20px;
+ font-weight: bold;
+ cursor: pointer;
+ position: relative;
+ z-index: 1;
+ overflow: hidden;
+}
+
+.btn:hover {
+ color: black;
+}
+
+.btn:after {
+ content: "";
+ background: white;
+ position: absolute;
+ z-index: -1;
+ left: -20%;
+ right: -20%;
+ top: 0;
+ bottom: 0;
+ transform: skewX(-45deg) scale(0, 1);
+ transition: all 0.5s;
+}
+
+.btn:hover:after {
+ transform: skewX(-45deg) scale(1, 1);
+ -webkit-transition: all 0.5s;
+ transition: all 0.5s;
+}
+
+.btn-green {
+padding: 0.5em;
+ margin: 0.5em;
+ background: #2ca82c;
+ color: white;
+ border: none;
+ border-radius: 0.625em;
+ font-size: 20px;
+ font-weight: bold;
+ cursor: pointer;
+ position: relative;
+ z-index: 1;
+ overflow: hidden;
+}
+
+.btn-green:hover {
+ color: #2ca82c;
+}
+
+.btn-green:after {
+ content: "";
+ background: white;
+ position: absolute;
+ z-index: -1;
+ left: -20%;
+ right: -20%;
+ top: 0;
+ bottom: 0;
+ transform: skewX(-45deg) scale(0, 1);
+ transition: all 0.5s;
+}
+
+.btn-green:hover:after {
+ transform: skewX(-45deg) scale(1, 1);
+ -webkit-transition: all 0.5s;
+ transition: all 0.5s;
+}
+
+.btn-red {
+
+ margin: 0.5em;
+ padding: 0.5em;
+ background: rgb(225, 0, 0);
+ color: white;
+ border: none;
+ border-radius: 0.625em;
+ font-size: 20px;
+ font-weight: bold;
+ cursor: pointer;
+ position: relative;
+ z-index: 1;
+ overflow: hidden;
+}
+
+.btn-red:hover {
+ color: rgb(225, 0, 0);
+}
+
+.btn-red:after {
+ content: "";
+ background: white;
+ position: absolute;
+ z-index: -1;
+ left: -20%;
+ right: -20%;
+ top: 0;
+ bottom: 0;
+ transform: skewX(-45deg) scale(0, 1);
+ transition: all 0.5s;
+}
+
+.btn-red:hover:after {
+ transform: skewX(-45deg) scale(1, 1);
+ -webkit-transition: all 0.5s;
+ transition: all 0.5s;
+}
+
+.btn-gray {
+
+ margin: 0.5em;
+ padding: 0.5em;
+ background: rgb(122, 122, 122);
+ color: white;
+ border: none;
+ border-radius: 0.625em;
+ font-size: 20px;
+ font-weight: bold;
+ cursor: pointer;
+ position: relative;
+ z-index: 1;
+ overflow: hidden;
+}
+
+.btn-gray:hover {
+ color: rgb(122, 122, 122);
+}
+
+.btn-gray:after {
+ content: "";
+ background: white;
+ position: absolute;
+ z-index: -1;
+ left: -20%;
+ right: -20%;
+ top: 0;
+ bottom: 0;
+ transform: skewX(-45deg) scale(0, 1);
+ transition: all 0.5s;
+}
+
+.btn-gray:hover:after {
+ transform: skewX(-45deg) scale(1, 1);
+ -webkit-transition: all 0.5s;
+ transition: all 0.5s;
+}
+
 
 .circle-pattern {
     --s: 55px; /* control the size*/

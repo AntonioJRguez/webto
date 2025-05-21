@@ -46,6 +46,12 @@
                     class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
                 <div class="mb-4">
+                    <label for="duration" class="block text-gray-700">Duracion (Horas):</label>
+                    <input autocomplete="off" type="string" id="duration" name="duration"  required
+                    value="{{ old('duration', $event->duration) }}" placeholder="01:00"
+                    class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="mb-4">
                     <label for="event_date" class="block text-gray-700">Fecha de realización del evento:</label>
                     <input type="datetime-local" name="event_date" id="event_name" required
                         value="{{ old('event_date', $event->event_date) }}"

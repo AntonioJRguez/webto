@@ -5,20 +5,68 @@
             <div class="w-full flex flex-col justify-center">
                 <h1 class= "text-xl">Eventos</h1>
             </div>
+
+
             <section class="grid grid-cols-3 gap-6 p-6">
+                @php
+                
+                @endphp
                 @foreach ($events as $event)
-                    <article class="border-2 border-verde-claro rounded-lg ">
-                        <div class="p-2 flex justify-center">
-                            <h2>{{ $event->name }}</h2>
+                    @php
+                        $asistants = 0;
+                    @endphp
+                    <article class="border-2 border-verde-claro rounded-lg p-2">
+                        <div class=" flex flex-col items-center">
+                            <h2 class="font-bold">{{ $event->name }}</h2>
+                            @if (!is_null($event->image_id))
+                                <x-cloudinary::image public-id="{{ $event->image_id }}" class="w-72" />
+                            @else
+                                <x-cloudinary::image public-id="noimage" class="w-72"/>
+                            @endif
+
                         </div>
                         <div class="p-2 flex flex-col items-center">
-                            <p>{{ $event->description }}</p>
+                            <img src="" alt="">
+                            <p class="border-1 rounded-s p-2 bg-verde-claro">{{ $event->description }}</p>
                             @foreach ($event->users as $asistant)
-                                {{ $asistant->name }}, parcela: {{ $asistant->plot->name }}
+                                @php
+                                    $asistants++;
+                                @endphp
                             @endforeach
+                            <div>
+                                Cupo de asistentes: {{ $asistants }}/{{ $event->capacity }}
+                            </div>
+                            <div>
+                                Fecha evento: {{ $event->event_date}}
+                            </div>
+                            <div>
+                                Duración(Horas): {{ $event->duration}}
+                            </div>
+                            <div>
+                                Lugar: {{ $event->location}}
+                            </div>
+                            @if ($event->users->contains('id', Auth::id()))
+                                <button class="btn-red">Desapuntarme</button>
+                            @else
+                                @if ($asistants < $event->capacity)
+                                   <button class="btn-green">Apuntarme</button>
+                                @else
+                                    <button class="btn-gray">Evento lleno</button>
+                                @endif
+                            @endif
                         </div>
                     </article>
                 @endforeach
+
+
+
+
+
+
+                <x-cloudinary::widget>Upload Files</x-cloudinary::widget>
+
+
+
                 {{-- paginacion --}}
 
 

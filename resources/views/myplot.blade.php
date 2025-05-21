@@ -6,13 +6,12 @@
         <div class="flex flex-col items-center w-[80%] h-full bg-gris-claro rounded-lg p-4">
             <h1 class= "text-gris-oscuro text-xl">{{ $plot->name }}</h1>
             <p>{{ $plot->description }}</p>
-            @if ($plot->crops->isEmpty())
-                <p>No hay cultivos en esta parcela</p>
-            @else
-                @foreach ($plot->crops as $crop)
-                    <p>{{ $crop->name }}</p>
-                @endforeach
-            @endif
+            
+
+            {{-- @dump($completedTasks)
+            @dump($pastTasks)
+            @dump($todayTasks)
+            @dump($futureTasks) --}}
 
             <div class="bg-white shadow-lg p-6 mb-6 mt-6 mx-auto w-[90%]">
                 <h2 class="flex justify-center">
@@ -38,31 +37,14 @@
                             </svg>Tareas pendientes
                         </h3>
                         <ul class="flex flex-col items-center space-y-2 m-3">
-                            <li class="flex items-center gap-3">
-                                <input type="checkbox" name="task1" id="task1">
-                                <label for="task1">Regar tomates</label>
+                            @foreach ($pastTasks as $pastTask)
+                                <li class="flex items-center gap-3">
+                                    <input type="checkbox" name="task{{ $pastTask['id'] }}" id="task1">
+                                    <label for="task1">{{ $pastTask['task_name'] }}</label>
 
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <input type="checkbox" name="task1" id="task1">
-                                <label for="task1">Regar tomates</label>
-
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <input type="checkbox" name="task1" id="task1">
-                                <label for="task1">Regar tomates</label>
-
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <input type="checkbox" name="task1" id="task1">
-                                <label for="task1">Regar tomates</label>
-
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <input type="checkbox" name="task1" id="task1">
-                                <label for="task1">Regar tomates</label>
-
-                            </li>
+                                </li>
+                            @endforeach
+                            
                         </ul>
                         <div class="flex justify-center gap-2 mt-4">
                             <button class="bg-verde-claro hover:bg-verde-medio p-3 rounded-lg">Marcar como
@@ -82,12 +64,21 @@
                             Tareas próximas</h3>
 
                         <ul class="flex flex-col items-center space-y-2 m-3">
+                            @foreach ($futureTasks as $nextTask)
+                            <li class="flex items-center gap-3">
+                                <p class="text-sm p-1 bg-amarillo-oscuro border-gris-medio">{{ date('d-m', strtotime($nextTask['limit_date'])) }}</p>
+                                <p class="text-sm">{{$nextTask['task_name']}}</p>
+                                <button class="bg-amarillo-claro hover:bg-amarillo-medio p-1 rounded-lg">Editar</button>
+                                <button class="bg-red-400 hover:bg-red-500 p-1 rounded-lg">Eliminar</button>
+                                <button class="bg-blue-400 hover:bg-blue-500 p-1 rounded-lg">Mover a pendientes</button>
+                            </li>
+                            @endforeach
                             <li class="flex items-center gap-3">
                                 <p class="text-sm p-1 bg-amarillo-oscuro border-gris-medio">18-5</p>
                                 <p class="text-sm"> Plantar aguacate</p>
                                 <button class="bg-amarillo-claro hover:bg-amarillo-medio p-1 rounded-lg">Editar</button>
                                 <button class="bg-red-400 hover:bg-red-500 p-1 rounded-lg">Eliminar</button>
-                                <button class="bg-blue-400 hover:bg-blue-500 p-1 rounded-lg">Mover a hoy</button>
+                                <button class="bg-blue-400 hover:bg-blue-500 p-1 rounded-lg">Mover a pendientes</button>
                             </li>
                         </ul>
                         <button class="bg-verde-medio hover:bg-verde-oscuro rounded-lg mt-auto w-36 p-2">Añadir
@@ -102,38 +93,40 @@
 
                 <h3 class="flex justify-center mt-5">Tareas Pendientes</h3>
                 <div class="flex gap-6 px-4 py-2 overflow-x-auto m-4 bg-amarillo-claro">
+                    @foreach ($futureTasks as $nextTask)
                     <div class="flex-shrink-0 bg-white shadow-md p-3 rounded-md w-64 break-words">
-                        <p class="text-sm text-gris-medio">04 Mayo</p>
-                        <h4 class="font-bold">Regar tomates</h4>
-                        <p class="text-xs">Riego por la mañana para evitar evaporación.</p>
+                        <p class="text-sm text-gris-medio">{{ date('d-m', strtotime($nextTask['limit_date']))}}</p>
+                        <h4 class="font-bold">{{$nextTask['task_name']}}</h4>
+                        <p class="text-xs">{{$nextTask['description']}}</p>
                     </div>
-                    <div class="flex-shrink-0 bg-white shadow-md p-3 rounded-md w-64 break-words">
-                        <p class="text-sm text-gris-medio">05 Mayo</p>
-                        <h4 class="font-bold ">Revisar plagas</h4>
-                        <p class="text-xs">Inspección de hojas en lechugas y
-                            zanahoriaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaas.</p>
-                    </div>
+                    @endforeach
                 </div>
                 <h3 class="flex justify-center mt-5">Tareas Realizadas</h3>
+
                 <div class="flex gap-6 px-4 py-2 overflow-x-auto m-4 bg-verde-claro">
+                    @if (empty($completedTasks))
+                    <div class="flex h-20 items-center justify-center"><p>No hay ninguna tarea realizada.</p></div>
+                    @else
+                    @foreach ($completedTasks as $completedTask)
                     <div class="flex flex-col flex-shrink-0 bg-gris-claro shadow-md p-3 rounded-md w-64 break-words">
-                        <p class="text-sm text-gris-medio">04 Mayo</p>
-                        <h4 class="font-bold">Regar tomates</h4>
-                        <p class="text-xs mb-2">Riego por la mañana para evitar evaporación.</p>
-                        <button class="m-3 mt-auto border border-gris-medio  bg-amarillo-claro text-sm hover:bg-amarillo-oscuro p-2 rounded-lg">Mover
+                        <p class="text-sm text-gris-medio">{{ date('d-m', strtotime($completedTask['limit_date']))}}</p>
+                        <h4 class="font-bold">{{$completedTask['task_name']}}</h4>
+                        <p class="text-xs mb-2">{{$completedTask['description']}}</p>
+                        <button
+                            class="m-3 mt-auto border border-gris-medio  bg-amarillo-claro text-sm hover:bg-amarillo-oscuro p-2 rounded-lg">Mover
                             a pendientes</button>
                     </div>
-                    <div class="flex flex-col flex-shrink-0 bg-gris-claro shadow-md p-3 rounded-md w-64 break-words">
-                        <p class="text-sm text-gris-medio">05 Mayo</p>
-                        <h4 class="font-bold ">Revisar plagas</h4>
-                        <p class="text-xs mb-2">Inspección de hojas en lechugas y
-                            zanahoriaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaas.</p>
-                        <button class="m-3 mt-auto border border-gris-medio bg-amarillo-claro text-sm hover:bg-amarillo-oscuro p-2 rounded-lg">Mover
-                            a pendientes</button>
-                    </div>
+                    @endforeach
+                    @endif
                 </div>
             </div>
-
+            @if ($plot->crops->isEmpty())
+                <p>No hay cultivos en esta parcela</p>
+            @else
+                @foreach ($plot->crops as $crop)
+                    <p>{{ $crop->name }}</p>
+                @endforeach
+            @endif
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 p-6 ">
 
                 <!-- Card -->
@@ -195,7 +188,7 @@
 
                 <!-- Card -->
                 <article
-                    class="bg-white p-4 rounded-xl text-lg font-bold shadow-md border border-verde-oscuro hover:bg-verde-claro  flex flex-col justify-center items-center cursor-pointer">
+                    class="bg-white select-none p-4 rounded-xl text-lg font-bold shadow-md border border-verde-oscuro hover:bg-verde-claro  flex flex-col justify-center items-center cursor-pointer">
                     <h3>Añadir cultivo </h3>
                 </article>
                 <!-- Repite para otras tarjetas si lo deseas... -->

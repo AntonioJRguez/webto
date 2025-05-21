@@ -9,7 +9,7 @@ class Task extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['task_name', 'plot_id'];
+    protected $fillable = ['task_name', 'plot_id', 'description','limit_date','completed_date','status','is_periodic','time_period'];
 
     public function plot(){
         return $this->belongsTo(Plot::class);

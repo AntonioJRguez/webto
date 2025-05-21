@@ -11,7 +11,7 @@ class Plot extends Model
     protected $fillable = ['name', 'description','plot_code'];
 
     public function tasks() {
-        return $this->hasMany(Task::class);
+        return $this->hasMany(Task::class)->orderBy('limit_date');
     }
     public function users() {
         return $this->hasMany(User::class, 'plot_code', 'plot_code');
