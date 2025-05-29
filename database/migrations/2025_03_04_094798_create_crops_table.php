@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('status')->default('unassigned');
             $table->string('description');
             $table->foreignId('plot_id')->constrained()->onDelete('cascade');
-
+            $table->timestamps();
         });
     }
 

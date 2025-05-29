@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Crop;
 use Carbon\Carbon;
 
 use App\Models\Event;
@@ -155,6 +156,38 @@ class DatabaseSeeder extends Seeder
             'plot_id' => '1',
             'description' => 'descripciondescripciondescripciondescripciondescripciondescripciondescripciondescripciondescripcion',
             'limit_date' => Carbon::yesterday(),
+        ]);
+        Task::factory()->create([
+            'task_name' => 'tarea pa ver si se repite diariamente',
+            'plot_id' => '1',
+            'description' => 'descripciondescripciondescripciondescripciondescripciondescripciondescripciondescripciondescripcion',
+            'limit_date' => Carbon::tomorrow(),
+            'is_periodic' => true,
+            'time_period' => 1
+        ]);
+        Crop::factory()->create([
+            'name' => 'tomate',
+            'sowing_date' => Carbon::today(),
+            'harvest_date' => Carbon::parse('2025-05-24'),
+            'status' => 'sowed',
+            'description' => 'tomate sembrado un dia de sol',
+            'plot_id' => 1
+        ]);
+        Crop::factory()->create([
+            'name' => 'pimiento',
+            'sowing_date' => Carbon::today(),
+            'harvest_date' => Carbon::parse('2025-05-26'),
+            'status' => 'sowed',
+            'description' => 'pimiento sembrado un dia de sol',
+            'plot_id' => 1
+        ]);
+        Crop::factory()->create([
+            'name' => 'cebolla',
+            'sowing_date' => Carbon::today(),
+            'harvest_date' => Carbon::parse('2025-05-29'),
+            'status' => 'sowed',
+            'description' => 'cebolla sembrado un dia de sombra',
+            'plot_id' => 1
         ]);
         $user = User::find(1);
         $user->events()->attach(1);

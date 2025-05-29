@@ -63,4 +63,31 @@ Route::get('/', [HomeController::class, 'showIndex'])->name('index');
 
 Route::get('/myplot', [HomeController::class, 'showMyPlot'])->name('myplot');
 
+Route::get('/myplot/newtask', [HomeController::class, 'showCreateTask'])->name('newtask');
+Route::post('/myplot/newtask', [HomeController::class, 'CreateTask'])->name('store.task');
+Route::get('/myplot/task/{task}', [HomeController::class, 'showEditTask'])->name('edit.task');
+Route::post('/myplot/task/{task}', [HomeController::class, 'updateTask'])->name('update.task');
+
+Route::post('/myplot/tasks/move/{id}', action: [HomeController::class, 'updateTaskToYesterday'])->name('task.moveToYesterday');
+Route::post('/myplot/deleteTask/{id}', action: [HomeController::class, 'deleteTask'])->name('task.delete');
+
+Route::post('/myplot/tasks/complete/', action: [HomeController::class, 'completeTask'])->name('tasks.complete');
+Route::post('/myplot/tasks/movetomorrow/', action: [HomeController::class, 'updateTasksToTomorrow'])->name('tasks.moveToTomorrow');
+Route::post('/myplot/tasks/movepending/', action: [HomeController::class, 'updateTasksToPending'])->name('task.moveToPending');
+
+
+
+Route::post('/myplot/tasks/delete/', action: [HomeController::class, 'deleteTasks'])->name('tasks.delete');
+
+
+Route::get('/myplot/newcrop', [HomeController::class, 'showCreateCrop'])->name('newcrop');
+Route::post('/myplot/newcrop', [HomeController::class, 'CreateCrop'])->name('store.crop');
+Route::get('/myplot/crop/{crop}', [HomeController::class, 'showEditCrop'])->name('edit.crop');
+Route::post('/myplot/crop/{crop}', [HomeController::class, 'updateCrop'])->name('update.crop');
+
+Route::post('/myplot/deleteCrop/{id}', [HomeController::class, 'deleteCrop'])->name('crop.delete');
+
 Route::get('/events', [HomeController::class, 'showEvents'])->name('events');
+
+Route::get('/calendar', [HomeController::class, 'showCalendar'])->name('calendar');
+

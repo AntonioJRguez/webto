@@ -179,3 +179,15 @@ padding: 0.5em;
     background-size: var(--_s) calc(4*var(--s));
   
   }
+@media (max-width: 905px) {
+  .fc-header-toolbar{
+    flex-direction: column;
+    justify-content: space-around;
+  }
+}
+@media (max-width: 905px) {
+  .fc{
+    font-size: 0.8em;
+  }
+}
+  

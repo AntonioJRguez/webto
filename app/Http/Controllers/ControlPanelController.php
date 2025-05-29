@@ -257,7 +257,6 @@ class ControlPanelController extends Controller
     public function StoreEvent(Request $request)
     {
 
-         // Validación
          $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|max:255',
@@ -266,8 +265,6 @@ class ControlPanelController extends Controller
             'capacity'=> 'required|integer|max_digits:5',
         ]);
 
-
-        // Crear la parcela
         Event::create([
             'name' => $request->name,
             'description' => $request->description,
