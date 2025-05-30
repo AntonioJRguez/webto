@@ -45,15 +45,21 @@
                             <div>
                                 Lugar: {{ $event->location}}
                             </div>
+
+                            <form method="POST" id="editTasksForm" action="{{route('toggle.assistant')}}">
+                                @csrf
+                                @method('POST')
+                                <input type="hidden" name="eventId" id="eventId" value="{{ $event->id}}">
                             @if ($event->users->contains('id', Auth::id()))
-                                <button class="btn-red">Desapuntarme</button>
+                                <button type="submit" class="btn-red">Desapuntarme</button>
                             @else
                                 @if ($asistants < $event->capacity)
-                                   <button class="btn-green">Apuntarme</button>
+                                   <button type="submit" class="btn-green">Apuntarme</button>
                                 @else
                                     <button class="btn-gray">Evento lleno</button>
                                 @endif
                             @endif
+                            </form>
                         </div>
                     </article>
                 @endforeach

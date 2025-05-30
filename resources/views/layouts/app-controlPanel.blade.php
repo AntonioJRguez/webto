@@ -31,7 +31,7 @@ if (Auth::check()) {
         <!-- Header de la página -->
         <header class="top-0 left-0 w-full h-[120px]  ">
             <div class="container mx-auto flex items-center justify-center px-4 py-2 belittle">
-                <a href="{{route('index')}}"><img src="{{ asset('images/webtologo.png') }}" alt="Logo" class="h-[100px]"></a>
+                <a href="{{route('admin')}}"><img src="{{ asset('images/webtologo.png') }}" alt="Logo" class="h-[100px]"></a>
             </div>
         </header>
     </div>
@@ -57,5 +57,7 @@ if (Auth::check()) {
 
 </body>
 @vite(['resources/js/app.js'])
-
+<form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+    @csrf
+</form>
 </html>

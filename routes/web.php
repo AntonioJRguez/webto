@@ -88,6 +88,7 @@ Route::post('/myplot/crop/{crop}', [HomeController::class, 'updateCrop'])->name(
 Route::post('/myplot/deleteCrop/{id}', [HomeController::class, 'deleteCrop'])->name('crop.delete');
 
 Route::get('/events', [HomeController::class, 'showEvents'])->name('events');
+Route::post('/events', [HomeController::class, 'toggleUserGoEvent'])->name('toggle.assistant');
 
 Route::get('/calendar', [HomeController::class, 'showCalendar'])->name('calendar');
 

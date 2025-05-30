@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('description');
             $table->datetime('limit_date')->nullable();
             $table->timestamp('completed_date')->nullable();
+            // $table->unsignedBigInteger('completed_by')->nullable();
+            $table->foreignId('completed_by')->nullable()->constrained('users')->onDelete('set null');
             $table->string('status')->default('unrealized');
             $table->boolean('is_periodic')->default(false);
             $table->integer('time_period')->nullable();

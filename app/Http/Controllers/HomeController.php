@@ -64,6 +64,14 @@ class HomeController extends Controller
                 $fecha = $task['limit_date'];
                 if ($fecha < $today) {
                     if (!is_null($task['completed_date'])) {
+
+
+                        $userWho = $task['completed_by']; // aquí solo tienes el ID
+                        // Para obtener el usuario, tendrías que consultar:
+                        $user = User::find($userWho);
+                        $task['userName'] = $user ? $user->name : null;
+
+
                         $completedTasks[] = $task;
                     } else {
                         $pastTasks[] = $task;
@@ -96,15 +104,6 @@ class HomeController extends Controller
         }
     }
 
-    public function showCalendar()
-    {
-        if (Auth::check()) {
-            return view('calendar');
-        } else {
-
-            return view('index');
-        }
-    }
 
     public function showCreateTask()
     {
@@ -183,7 +182,7 @@ class HomeController extends Controller
                 'description' => $validated['description'],
                 'status' => $validated['status'],
                 'harvest_date' => $validated['harvest_date'],
-                'sowing_date' => $validated['sowing_date'] 
+                'sowing_date' => $validated['sowing_date']
             ]);
 
 
@@ -320,7 +319,7 @@ class HomeController extends Controller
         ]);
 
         Task::whereIn('id', $validated['selected_tasks'])
-            ->update(['status' => 'completed', 'completed_date' => Carbon::now()]);
+            ->update(['status' => 'completed', 'completed_date' => Carbon::now(), 'completed_by' => Auth::user()->id]);
 
         return back()->with('success', 'Tareas completadas exitosamente');
 
@@ -408,7 +407,7 @@ class HomeController extends Controller
                 'message' => 'Task no encontrada'
             ], 404);
         }
-        
+
         $query = Task::where('task_name', $referenceTask->task_name)
             ->where('description', '=', $referenceTask->description)
             ->where('is_periodic', '=', $referenceTask->is_periodic)
@@ -435,7 +434,7 @@ class HomeController extends Controller
                 'message' => 'Task no encontrada'
             ], 404);
         }
-        
+
         $query = Crop::where('id', '=', $referenceCrop->id);
 
         $query->delete();
@@ -445,7 +444,7 @@ class HomeController extends Controller
             'new_state' => 'deleted'
         ]);
     }
- public function showEditCrop($cropId)
+    public function showEditCrop($cropId)
     {
         if (Auth::check()) {
             $crop = Crop::find($cropId);
@@ -473,14 +472,78 @@ class HomeController extends Controller
 
             $crop->name = $request->name;
             $crop->plot_id = $plotId;
-            $crop->description = $request->description ;
-            $crop->status = $request->status ;
+            $crop->description = $request->description;
+            $crop->status = $request->status;
             $crop->sowing_date = $request->sowing_date;
             $crop->harvest_date = $request->harvest_date;
             $crop->save();
 
             return redirect()->back()->with('success', 'Cultivo editado correctamente');
         } else {
+            return view('index');
+        }
+    }
+
+    public function toggleUserGoEvent(Request $request)
+    {
+        if (!Auth::check()) {
+            return view('index');
+        }
+        $id = $request->eventId;
+        $userid = Auth::user()->id;
+        $user = user::findOrFail($userid);
+        $event = Event::findOrFail($id);
+        $isGoing = $user->events()->where('event_id', $event->id)->exists();
+
+        if ($isGoing) {
+            $user->events()->detach($event->id);
+            return redirect()->back()->with('success', 'Te has desapuntado del evento.');
+        } else {
+            $currentAttendees = $event->users()->count();
+            if ($currentAttendees >= $event->capacity) {
+                return redirect()->back()->with('error', 'El evento está completo.');
+            }
+            $user->events()->attach($event->id);
+            return redirect()->back()->with('success', 'Te has apuntado al evento.');
+        }
+    }
+
+
+
+    public function showCalendar()
+    {
+        if (Auth::check()) {
+            $userid = Auth::user()->id;
+            $user = user::findOrFail($userid);
+            $events = $user->events->map(function ($event) {
+
+                return [
+                    'title' => $event->name,
+                    'start' => $event->event_date, // Asegúrate que es un campo datetime
+                    // 'end' => $event->end_time,
+                    'color' => '#366136',
+                ];
+            });
+
+            $tasks = $user->plot->tasks->map(function ($task) {
+                return [
+                    'title' => $task->task_name,
+                    'start' => $task->limit_date, // o cualquier fecha asociada
+                    'color' => '#665649',
+                    'allDay' => true
+                ];
+            });
+            $calendarItems = array_merge($events->toArray(), $tasks->toArray());
+
+            // $calendarItems = $events->merge($tasks);
+
+
+
+            return view('calendar', [
+                'calendarItems' => json_encode($calendarItems),
+            ]);
+        } else {
+
             return view('index');
         }
     }

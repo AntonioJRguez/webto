@@ -20,7 +20,13 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name', 'email', 'password', 'registration_date', 'is_admin', 'phone_number', 'plot_code',
+        'name',
+        'email',
+        'password',
+        'registration_date',
+        'is_admin',
+        'phone_number',
+        'plot_code',
     ];
 
 
@@ -83,5 +89,9 @@ class User extends Authenticatable
         $request->session()->regenerateToken(); // Regenera el token CSRF
 
         return redirect('/');
+    }
+    public function completedTasks()
+    {
+        return $this->hasMany(Task::class, 'completed_by');
     }
 }

@@ -233,6 +233,7 @@
                                     {{ date('d-m', strtotime($completedTask['completed_date'])) }}</p>
                                 <h4 class="font-bold">{{ $completedTask['task_name'] }}</h4>
                                 <p class="text-xs mb-2">{{ $completedTask['description'] }}</p>
+                               <p class="text-xs mb-2">{{"Realizada por: ". $completedTask['userName'] }}</p>
                                 <button onclick="moveTaskToPending({{ $completedTask['id'] }})"
                                     class="m-3 mt-auto border border-gris-medio  bg-amarillo-claro text-sm hover:bg-amarillo-oscuro p-2 rounded-lg">Mover
                                     a pendientes</button>

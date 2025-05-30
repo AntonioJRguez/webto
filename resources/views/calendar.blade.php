@@ -2,6 +2,7 @@
 @section('content')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            console.log({!!$calendarItems!!})
             var calendarEl = document.getElementById('calendar');
 
             let defaultView = window.innerWidth < 768 ? 'listWeek' : 'dayGridMonth';
@@ -19,6 +20,7 @@
 
                     calendar.changeView(newView);
                 },
+                events: {!!$calendarItems!!},
             });
 
 
