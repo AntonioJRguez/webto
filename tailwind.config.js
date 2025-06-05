@@ -11,6 +11,9 @@ export default {
   ],
   theme: {
     extend: {
+      boxShadow: {
+        'inner-custom': 'inset 0 0 15px rgba(0, 0, 0, 0.15);',
+      },
       backgroundImage: {
         'custom-pattern': "url('../images/hollowed-boxes.png')",
       },

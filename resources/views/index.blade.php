@@ -12,9 +12,6 @@
     <section id="comunidad" class="h-screen bg-verde-claro flex justify-center items-center">
         <h1 class="text-4xl font-bold text-gray-800">Comunidad</h1>
     </section>
-    <section id="contacto" class="h-screen bg-verde-oscuro flex justify-center items-center">
-        <h1 class="text-4xl font-bold text-gray-800">Contacto</h1>
-    </section>
     <x-modal>
         <x-slot name="modalTitle">
             <x-slot name="id">

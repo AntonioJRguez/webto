@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\Plot;
 use App\Models\User;
-
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -19,8 +19,6 @@ class ControlPanelController extends Controller
             $user = Auth::user();
             if (!is_null($user) && $user->is_admin) {
 
-                $plots = Plot::all();
-                $users = User::all();
                 return view('controlpanel.controlPanel',); // Redirigir al panel de admin
             } else {
                 Auth::logout(); // Desconectar si no es admin
@@ -36,7 +34,7 @@ class ControlPanelController extends Controller
         if (Auth::check()) {
             $user = Auth::user();
             if (!is_null($user) && $user->is_admin) {
-                $users = User::all();
+                $users = User::orderBy('id', 'desc')->get();
                 return view('controlpanel.users-controlPanel', compact('users')); // Redirigir al panel de admin
             } else {
                 Auth::logout(); // Desconectar si no es admin
@@ -104,7 +102,7 @@ class ControlPanelController extends Controller
         if (Auth::check()) {
             $user = Auth::user();
             if (!is_null($user) && $user->is_admin) {
-                $plots = Plot::all();
+                $plots = Plot::orderBy('id', 'desc')->get();
                 return view('controlpanel.plots-controlPanel', compact('plots')); // Redirigir al panel de admin
             } else {
                 Auth::logout(); // Desconectar si no es admin
@@ -180,7 +178,8 @@ class ControlPanelController extends Controller
         return redirect()->back()->with('success', 'Parcela creada correctamente.');
     }
 
-    public function showCreatePlot(){
+    public function showCreatePlot()
+    {
         return view('controlpanel.createPlot-controlPanel');
     }
 
@@ -193,7 +192,7 @@ class ControlPanelController extends Controller
         if (Auth::check()) {
             $user = Auth::user();
             if (!is_null($user) && $user->is_admin) {
-                $events = Event::all();
+                $events = Event::orderBy('id', 'desc')->get();
                 return view('controlpanel.events-controlPanel', compact('events')); // Redirigir al panel de admin
             } else {
                 Auth::logout(); // Desconectar si no es admin
@@ -229,7 +228,7 @@ class ControlPanelController extends Controller
             'description' => 'required|max:255',
             'location' => 'required|max:255',
             'event_date' => 'required|string|max:255',
-            'capacity'=> 'required|integer|max_digits:5',
+            'capacity' => 'required|integer|max_digits:5',
         ]);
 
 
@@ -241,13 +240,13 @@ class ControlPanelController extends Controller
         $event->location = $request->location;
         $event->event_date = $request->event_date;
         $event->capacity = $request->capacity;
-        
+
 
 
         $event->save();
         return redirect()->back()->with('success', 'Evento actualizado correctamente.');
     }
-    
+
     public function DestroyEvent($id)
     {
         $event = Event::findOrFail($id);
@@ -257,25 +256,39 @@ class ControlPanelController extends Controller
     public function StoreEvent(Request $request)
     {
 
-         $request->validate([
+        $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|max:255',
             'location' => 'required|max:255',
             'event_date' => 'required|string|max:255',
-            'capacity'=> 'required|integer|max_digits:5',
+            'capacity' => 'required|integer|max_digits:5',
+            'event_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
         ]);
+        $imageId = null;
+
+        if ($request->hasFile('event_image')) {
+            $uploadedFile = $request->file('event_image');
+
+            $uploadedImage = Cloudinary::upload($uploadedFile->getRealPath(), [
+                'folder' => 'events'
+            ]);
+
+            $imageId = $uploadedImage->getPublicId();
+        }
 
         Event::create([
             'name' => $request->name,
             'description' => $request->description,
-            'location'=> $request->location,
+            'location' => $request->location,
             'capacity' => $request->capacity,
             'event_date' => $request->event_date,
+            'image_id' => $imageId, // Puede ser null si no se subió imagen
         ]);
         return redirect()->back()->with('success', 'Evento creado correctamente.');
     }
 
-    public function showCreateEvent(){
+    public function showCreateEvent()
+    {
         return view('controlpanel.createEvent-controlPanel');
     }
 }

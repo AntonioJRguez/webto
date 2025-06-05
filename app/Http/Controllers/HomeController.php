@@ -18,7 +18,24 @@ class HomeController extends Controller
     public function showIndex()
     {
         if (Auth::check()) {
-            return view('index-session');
+            $user = AUTH::user();
+            $plot = $user->plot;
+            // $tasks = $plot->tasks->sortBy('limit_date');
+            // $tasks = $tasks->groupBy(function ($task) {
+            //     return $task->is_periodic ? $task->task_name : $task->id;
+            // })->map(function ($group) {
+            //     return $group->first();
+            // });
+
+            $today = Carbon::today()->toDateString();
+            $tasks = $plot->tasks
+                ->filter(fn($task) => !$task->is_periodic || $task->limit_date >= $today)
+                ->sortBy('limit_date')
+                ->groupBy(fn($task) => $task->is_periodic ? $task->task_name : $task->id)
+                ->map(fn($group) => $group->first());
+
+            $events = Event::where('event_date', '>=', $today)->orderBy('event_date', 'asc')->paginate(3);
+            return view('index-session', compact('tasks', 'events'));
         } else {
             return view('index');
         }

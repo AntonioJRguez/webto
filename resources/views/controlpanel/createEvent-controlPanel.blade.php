@@ -17,7 +17,7 @@
                 <div class="bg-red-500 text-white p-3 rounded mb-4 text-center animate-fade-in-up">{{ $error }}</div>
             @endforeach
         @endif
-            <form method="POST" id="createEventForm" name='action' action="{{ route('admin.create.event') }}">
+            <form method="POST" id="createEventForm" name='action' action="{{ route('admin.create.event') }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 
@@ -50,6 +50,10 @@
                     <input autocomplete="off" type="string" id="duration" name="duration" step="60" required
                     value="{{ old('duration') }} " placeholder="01:00"
                     class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="mb-4">
+                    <label for="event_image" class="block text-gray-700">Imagen del evento (Opcional):</label>
+                    <input type="file" name="event_image" id="event_image">
                 </div>
                 <div class="mb-4">
                     <label for="plot_name" class="block text-gray-700">Fecha de realización del evento:</label>

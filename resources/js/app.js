@@ -49,3 +49,8 @@ window.openEditUserModal = function (id, name, email, plot, isAdmin) {
     })
 }
 
+window.toggleMenu = function() {
+        const menu = document.getElementById('nav-menu');
+        menu.classList.toggle('hidden');
+    }
+

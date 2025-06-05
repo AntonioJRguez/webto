@@ -3,9 +3,10 @@
     <main>
 
         <section class="h-full bg-white p-8">
-            <div class="grid grid-cols-5  gap-6">
+            <div class="grid grid-cols-1  sm:grid-cols-5  gap-6">
                 @foreach ($plots as $plot)
-                    <article class="bg-gray-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadowds flex-column justify-around">
+                    <article
+                        class="bg-gray-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadowds flex-column justify-around">
                         <h2 class="text-xl font-bold text-gray-800 mb-2">Parcela ID: {{ $plot->id }}</h2>
                         <p class="text-gray-600 mb-2">Nombre: {{ $plot->name }}</p>
                         <p class="text-gray-600 mb-2">Descripcion: {{ $plot->description }}</p>
@@ -26,12 +27,14 @@
                                     Editar
                                 </button>
                             </a>
-                            <button onclick="toggleDialog('modal-delete-plot{{ $plot->id }}')"
-                                class="text-red-600 hover:text-orange-400 cursor-pointer">Eliminar</button>
+                            @if ($plot->id !== 1)
+                                <button onclick="toggleDialog('modal-delete-plot{{ $plot->id }}')"
+                                    class="text-red-600 hover:text-orange-400 cursor-pointer">Eliminar</button>
+                            @endif
                         </div>
                     </article>
                 @endforeach
-                <a href="{{route('admin.create.plot')}}" class="flex items-center">
+                <a href="{{ route('admin.create.plot') }}" class="flex items-center">
                     <article
                         class="bg-green-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow flex justify-center items-center cursor-pointer active:scale-95 select-none">
                         <p>Añadir parcela.</p>

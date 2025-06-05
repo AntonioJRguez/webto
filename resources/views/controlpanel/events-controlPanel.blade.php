@@ -3,7 +3,7 @@
     <main>
 
         <section class="h-full bg-white p-8">
-            <div class="grid grid-cols-5  gap-6">
+            <div class="grid grid-cols-1  sm:grid-cols-5  gap-6">
 
                 @foreach ($events as $event)
                     <article class="bg-gray-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">

@@ -33,9 +33,7 @@
     {{-- <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js'></script> --}}
     <main class="mt-20 flex justify-center">
         <div class="flex flex-col sm:w-[95%] md:w-[80%] w-full h-full bg-gris-claro rounded-lg p-6">
-            <div class="w-full flex flex-col justify-center">
-                <h1 class= "text-xl">CALENDARIO</h1>
-            </div>
+            
             <div class="flex flex-col min-w-full" id='calendar'></div>
 
         </div>

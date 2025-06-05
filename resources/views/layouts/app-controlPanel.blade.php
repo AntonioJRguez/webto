@@ -39,7 +39,7 @@ if (Auth::check()) {
         <h1 class="text-4xl">Panel de control:</h1>
     </header>
 
-    <nav class="sticky top-0 left-0 w-full bg-gradient-to-r from-green-700 via-green-500 to-yellow-400 shadow-md z-40 ">
+    <nav class="text-xs sm:text-base sticky top-0 left-0 w-full bg-gradient-to-r from-green-700 via-green-500 to-yellow-400 shadow-md z-40 ">
         <ul class="flex flex-row justify-around text-gray-700 font-medium px-4 py-3 items-center">
             <li><a href="{{route('admin.users')}}" class="hover:text-gray-300">Usuarios</a></li>
             <li><a href="{{route('admin.plots')}}" href="#parcelas" class="hover:text-gray-300">Parcelas</a></li>
