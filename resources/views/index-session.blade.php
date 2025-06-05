@@ -26,16 +26,18 @@
                         </svg>
                         <h1 class=" text-2xl font-bold text-center text-gris-profundo ">Eventos próximos</h1>
                     </div>
-                    @if ($events->isEmpty())
+                    @if (empty($events))
                         <div class="flex h-20 items-center justify-center  text-sm">
                             <p>No hay ningún evento próximamente.</p>
                         </div>
                     @else
+                    
+                   
                         @foreach ($events as $event)
-                            <div class="flex items-center m-4 ">
+                            <div class="flex justify-left items-center px-10 m-4 w-full">
                                 <div class="w-16 h-16 bg-gray-300 rounded-md flex-shrink-0 overflow-hidden">
                                     @if (!is_null($event->image_id))
-                                        <x-cloudinary::image public-id="{{ $event->image_id }}" />
+                                        <x-cloudinary::image public-id="{{ $event->image_id }} " class="h-full w-auto max-w-full object-contain " />
                                     @else
                                         <x-cloudinary::image public-id="noimage" />
                                     @endif

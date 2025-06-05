@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\Plot;
 use App\Models\User;
+use Cloudinary\Api\Upload\UploadApi;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -266,21 +267,21 @@ class ControlPanelController extends Controller
         ]);
         $imageId = null;
 
-        if ($request->hasFile('event_image')) {
-            $uploadedFile = $request->file('event_image');
+    if ($request->hasFile('event_image')) {
+        $filePath = $request->file('event_image')->getRealPath();
 
-            $uploadedImage = Cloudinary::upload($uploadedFile->getRealPath(), [
-                'folder' => 'events'
-            ]);
+        $upload = (new UploadApi())->upload($filePath);
 
-            $imageId = $uploadedImage->getPublicId();
-        }
+        $imageId = $upload['public_id'];
+    }
 
+   
         Event::create([
             'name' => $request->name,
             'description' => $request->description,
             'location' => $request->location,
             'capacity' => $request->capacity,
+            'duration' => $request->duration,
             'event_date' => $request->event_date,
             'image_id' => $imageId, // Puede ser null si no se subió imagen
         ]);

@@ -34,7 +34,7 @@ class HomeController extends Controller
                 ->groupBy(fn($task) => $task->is_periodic ? $task->task_name : $task->id)
                 ->map(fn($group) => $group->first());
 
-            $events = Event::where('event_date', '>=', $today)->orderBy('event_date', 'asc')->paginate(3);
+            $events = Event::where('event_date', '>=', $today)->orderBy('event_date', 'asc')->get();
             return view('index-session', compact('tasks', 'events'));
         } else {
             return view('index');
