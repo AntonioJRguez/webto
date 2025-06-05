@@ -12,10 +12,16 @@ class LoginController extends Controller
 {
     public function logInAdmin(Request $request)
     {
+        $customMessages = [
+            'email.required' => 'El correo electrónico es obligatorio.',
+            'email.email' => 'Debe ingresar un correo electrónico válido (ejemplo: usuario@dominio.com).',
+            'password.required' => 'La contraseña es obligatoria.',
+        ];
+
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
-        ]);
+        ], $customMessages);
 
         if (Auth::attempt($credentials, false)) {
             $user = Auth::user();
@@ -31,14 +37,20 @@ class LoginController extends Controller
     }
     public function logInUser(Request $request)
     {
+        $customMessages = [
+            'email.required' => 'Por favor ingresa tu dirección de correo electrónico',
+            'email.email' => 'Debes proporcionar una dirección de correo válida (ejemplo: usuario@dominio.com)',
+            'password.required' => 'Es necesario que ingreses tu contraseña',
+        ];
+
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
-        ]);
+        ], $customMessages);
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-                return redirect()->route('index'); // Redirigir al index
+            return redirect()->route('index'); // Redirigir al index
         }
 
         return back()->withErrors(['error' => 'Credenciales incorrectas.']);
@@ -52,5 +64,4 @@ class LoginController extends Controller
 
         return redirect('/');
     }
-    
 }

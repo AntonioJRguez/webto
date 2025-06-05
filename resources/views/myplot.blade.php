@@ -324,8 +324,12 @@
 
             <a href="{{ route('newcrop') }}">
                 <article
-                    class="bg-white select-none p-4 rounded-xl text-lg font-bold shadow-md border border-verde-oscuro hover:bg-verde-claro  flex flex-col justify-center items-center cursor-pointer">
-                    <h3>Añadir cultivo </h3>
+                    class="bg-white select-none p-4 rounded-xl text-lg font-bold shadow-md border border-verde-oscuro hover:bg-verde-claro  flex justify-center items-center cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="size-6 mr-1">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                        </svg><h3>
+                        Añadir cultivo </h3>
                 </article>
             </a>
         </div>
@@ -346,16 +350,16 @@
                 </div>
             @endif
             {{-- action="{{ route('delete.task', $event->id) }}" --}}
-
-            <button type="button" onclick="toggleDialog('modalDeleteTask')"
-                class="w-full bg-slate-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">
-                No
-            </button>
-            <button type="button" id="buttonDeleteTask" onclick=""
-                class="w-full bg-red-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">
-                Si
-            </button>
-
+            <div class="flex justify-around p-3 w-full">
+                <button type="button" onclick="toggleDialog('modalDeleteTask')"
+                    class="w-full bg-slate-500 hover:bg-slate-600 text-white font-bold py-2 px-4 m-3 rounded">
+                    No
+                </button>
+                <button type="button" id="buttonDeleteTask" onclick=""
+                    class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4  m-3 rounded">
+                    Si
+                </button>
+            </div>
         </x-slot>
     </x-modal>
     <x-modal>
@@ -372,16 +376,16 @@
                 </div>
             @endif
             {{-- action="{{ route('delete.task', $event->id) }}" --}}
-
-            <button type="button" onclick="toggleDialog('modalDeleteCrop')"
-                class="w-full bg-slate-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">
-                No
-            </button>
-            <button type="button" id="buttonDeleteCrop" onclick=""
-                class="w-full bg-red-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">
-                Si
-            </button>
-
+            <div class="flex justify-around p-3 w-full">
+                <button type="button" onclick="toggleDialog('modalDeleteCrop')"
+                    class="w-full bg-slate-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 m-3 rounded">
+                    No
+                </button>
+                <button type="button" id="buttonDeleteCrop" onclick=""
+                    class="w-full bg-red-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 m-3 rounded">
+                    Si
+                </button>
+            </div>
         </x-slot>
     </x-modal>
 @endsection

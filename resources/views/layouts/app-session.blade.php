@@ -2,6 +2,8 @@
 <html class="!scroll-smooth">
 
 <head>
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon.ico') }}">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -10,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
 
     @vite('resources/css/app.css')
+    <title>Webto</title>
 </head>
 
 <body class="circle-pattern min-h-screen">

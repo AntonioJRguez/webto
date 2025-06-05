@@ -179,35 +179,43 @@ class HomeController extends Controller
 
     public function createCrop(Request $request)
     {
-        if (Auth::check()) {
-
-
-            $validated = $request->validate([
-                'name' => 'required|string|max:255',
-                'description' => 'required|string',
-                'status' => 'required',
-                'harvest_date' => 'required|date',
-                'sowing_date' => 'required|date'
-            ]);
-
-            $user = Auth::user();
-            $plotId = $user->plot->id;
-
-            $crop = Crop::create([
-                'name' => $validated['name'],
-                'plot_id' => $plotId,
-                'description' => $validated['description'],
-                'status' => $validated['status'],
-                'harvest_date' => $validated['harvest_date'],
-                'sowing_date' => $validated['sowing_date']
-            ]);
-
-
-            return redirect()->back()->with('success', 'Cultivo creado correctamente');
-        } else {
-
+        if (!Auth::check()) {
             return view('index');
         }
+
+        $mp = [
+            'name.required' => 'El nombre del cultivo es obligatorio.',
+            'name.string' => 'El nombre debe ser texto.',
+            'name.max' => 'El nombre no puede exceder los 255 caracteres.',
+            'description.required' => 'La descripción es obligatoria.',
+            'description.string' => 'La descripción debe ser texto.',
+            'description.max' => 'La descripción no puede exceder los 255 caracteres.',
+            'status.required' => 'El estado del cultivo es obligatorio.',
+            'status.in' => 'El estado debe ser "sowed" (sembrado) o "harvestable" (cosechable).',
+            'harvest_date.required' => 'La fecha de cosecha es obligatoria.',
+            'harvest_date.date' => 'La fecha de cosecha debe ser una fecha válida.',
+            'sowing_date.required' => 'La fecha de siembra es obligatoria.',
+            'sowing_date.date' => 'La fecha de siembra debe ser una fecha válida.',
+        ];
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'status' => 'required|in:sowed,harvestable',
+            'harvest_date' => 'required|date',
+            'sowing_date' => 'required|date'
+        ], $mp);
+
+        $crop = Crop::create([
+            'name' => $validated['name'],
+            'plot_id' => Auth::user()->plot->id,
+            'description' => $validated['description'],
+            'status' => $validated['status'],
+            'harvest_date' => $validated['harvest_date'],
+            'sowing_date' => $validated['sowing_date']
+        ]);
+
+        return redirect()->back()->with('success', 'Cultivo creado correctamente');
     }
 
     protected function createPeriodicTasks(Task $originalTask, int $periodicity)
@@ -474,13 +482,28 @@ class HomeController extends Controller
     public function updateCrop(Request $request, $id)
     {
         if (Auth::check()) {
+            $mp = [
+                'name.required' => 'El nombre del cultivo es obligatorio.',
+                'name.string' => 'El nombre debe ser texto.',
+                'name.max' => 'El nombre no puede exceder los 255 caracteres.',
+                'description.required' => 'La descripción es obligatoria.',
+                'description.string' => 'La descripción debe ser texto.',
+                'description.max' => 'La descripción no puede exceder los 255 caracteres.',
+                'status.required' => 'El estado del cultivo es obligatorio.',
+                'status.in' => 'El estado debe ser "sowed" (sembrado) o "harvestable" (cosechable).',
+                'harvest_date.required' => 'La fecha de cosecha es obligatoria.',
+                'harvest_date.date' => 'La fecha de cosecha debe ser una fecha válida.',
+                'sowing_date.required' => 'La fecha de siembra es obligatoria.',
+                'sowing_date.date' => 'La fecha de siembra debe ser una fecha válida.',
+            ];
+
             $validated = $request->validate([
                 'name' => 'required|string|max:255',
-                'description' => 'required|string',
-                'status' => 'required',
+                'description' => 'required|string|max:255',
+                'status' => 'required|in:sowed,harvestable',
                 'harvest_date' => 'required|date',
-                'sowest_date' => 'required|date'
-            ]);
+                'sowing_date' => 'required|date'
+            ], $mp);
 
 
             $crop = Crop::findOrFail($id);

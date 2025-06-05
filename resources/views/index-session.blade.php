@@ -1,123 +1,169 @@
 @extends('layouts.app-session')
 @section('content')
-    <main class="mt-20 flex-grow flex flex-col items-center h-full w-full">
-        {{-- <h1 class="text-4xl md:text-5xl lg:text-9xl font-extrabold leading-tight tracking-tight text-gris-profundo climate">Tu huerto:</h1>
-         --}}
-
-        <div class="flex items-center justify-center space-x-4 bg-white bg-opacity-80 p-2 rounded-lg">
-            <img src="{{ asset('images/leaf.png') }}" alt="hoja izquierda" class="w-16 h-16 object-contain " />
-
-            <h1 class="text-2xl md:text-8xl font-extrabold text-gris-profundo climate">
-                Tu huerto:
-            </h1>
-
-            <img src="{{ asset('images/leaf.png') }}" alt="hoja derecha" class="w-16 h-16 object-contain " />
+    <main class="min-h-screen bg-gradient-to-b from-gris-claro to-green-100 py-12 px-4 sm:px-6 lg:px-8 mt-20">
+        <div class="text-center mb-12">
+            <div class="inline-flex items-center justify-center bg-white bg-opacity-90 rounded-md px-8 py-4 shadow-lg">
+                <img src="{{ asset('images/leaf.png') }}" alt="hoja" class="w-12 h-12 mr-4 animate-bounce">
+                <h1 class="text-3xl md:text-5xl font-bold text-gris-profundo climate">
+                    Bienvenid@ a tu huerto comunitario
+                </h1>
+                <img src="{{ asset('images/leaf.png') }}" alt="hoja" class="w-12 h-12 ml-4 animate-bounce delay-400">
+            </div>
         </div>
 
-        <section class="mt-10 flex flex-col w-full h-full">
-            <div class="flex flex-col md:flex-row md:justify-evenly ">
-                <div
-                    class="bg-gris-claro border-solid border-4  shadow-lg rounded-lg h-[600px] md:w-1/3 overflow-auto flex flex-col items-center p-3 m-7">
-                    <div class="flex items-center justify-center  mb-4 mt-5">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="bg-white rounded-l shadow-lg overflow-hidden transform transition hover:scale-105 duration-500">
+                <div class="bg-verde-oscuro p-4">
+                    <div class="flex items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="size-6 mr-1">
+                            stroke="currentColor" class="size-7 mr-1">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
                         </svg>
-                        <h1 class=" text-2xl font-bold text-center text-gris-profundo ">Eventos próximos</h1>
+                        <h2 class="text-xl font-bold">Próximos Eventos</h2>
                     </div>
+                </div>
+                <div class="p-6 h-96 overflow-y-auto">
                     @if (empty($events))
-                        <div class="flex h-20 items-center justify-center  text-sm">
-                            <p>No hay ningún evento próximamente.</p>
+                        <div class="flex flex-col items-center justify-center h-full text-gris-profundo">
+                            <p class="text-lg">No hay eventos próximos</p>
                         </div>
                     @else
-                    
-                   
-                        @foreach ($events as $event)
-                            <div class="flex justify-left items-center px-10 m-4 w-full">
-                                <div class="w-16 h-16 bg-gray-300 rounded-md flex-shrink-0 overflow-hidden">
-                                    @if (!is_null($event->image_id))
-                                        <x-cloudinary::image public-id="{{ $event->image_id }} " class="h-full w-auto max-w-full object-contain " />
-                                    @else
-                                        <x-cloudinary::image public-id="noimage" />
-                                    @endif
+                        <div class="space-y-4">
+                            @foreach ($events as $event)
+                                <div class="pl-4 py-2">
+                                    <div class="flex items-start">
+                                        @if (!is_null($event->image_id))
+                                            <div class="flex-shrink-0 mr-4">
+                                                <x-cloudinary::image public-id="{{ $event->image_id }}"
+                                                    class="h-16 w-16 rounded-md object-cover" />
+                                            </div>
+                                        @endif
+                                        <div>
+                                            <h3 class="font-bold text-lg text-gris-profundo">{{ $event->name }}</h3>
+                                            <p class="text-sm text-gray-600">{{ $event->description }}</p>
+                                            <div class="mt-2 flex items-center text-sm text-gray-500">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                                {{ \Carbon\Carbon::parse($event->event_date)->format('d M, Y H:i') }}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="ml-4">
-                                    <h2 class="text-lg font-semibold text-gray-800">{{ $event->name }}</h2>
-                                    <p class="text-gray-600 text-sm">
-                                        {{ $event->description }}
-                                    </p>
-                                </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
                     @endif
                 </div>
-
-                <div
-                    class="bg-gris-claro shadow-lg rounded-lg h-[600px] md:w-1/3 overflow-auto flex flex-col items-center p-3 m-7">
-                    <div class="max-w-lg mx-auto mt-5">
-                        <div class="flex items-center justify-center  mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="size-6 mr-1">
-                                <path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4" />
-                                <path d="M2 6h4" />
-                                <path d="M2 10h4" />
-                                <path d="M2 14h4" />
-                                <path d="M2 18h4" />
-                                <path
-                                    d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z" />
-                            </svg>
-                            <h1 class="text-2xl font-bold text-center text-gris-profundo">Tareas del Huerto
-                            </h1>
-                        </div>
-                        <ul class="space-y-4">
-                            @if ($tasks->isEmpty())
-                                <div class="flex h-20 items-center justify-center  text-sm">
-                                    <p>No hay ninguna tarea.</p>
-                                </div>
-                            @else
-                                @foreach ($tasks as $task)
-                                    @if (is_null($task->completed_date))
-                                        <li
-                                            class="flex items-center justify-between p-4 bg-yellow-100 border-l-4 border-yellow-500 rounded shadow">
-                                            <div>
-                                                <p class="text-lg font-medium text-yellow-800">{{ $task->task_name }}</p>
-                                                <p class="text-sm text-yellow-800">Pendiente</p>
-                                            </div>
-                                            <span class="text-amarillo-oscuro font-bold">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                    stroke-width="1.5" stroke="currentColor" class="size-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                                </svg>
-                                            </span>
-                                        </li>
-                                    @else
-                                        <li
-                                            class="flex items-center justify-between p-4 bg-verde-claro border-l-4 border-verde-profundo rounded shadow">
-                                            <div>
-                                                <p class="text-lg font-medium text-verde-profundo line-through">
-                                                    {{ $task->task_name }}
-                                                </p>
-                                                <p class="text-sm text-verde-profundo">Realizada</p>
-                                            </div>
-                                            <span class="text-verde-profundo font-bold">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                    stroke-width="1.5" stroke="currentColor" class="size-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="m4.5 12.75 6 6 9-13.5" />
-                                                </svg>
-                                            </span>
-                                        </li>
-                                    @endif
-                                @endforeach
-                                @endif
-                        </ul>
-                    </div>
-
+                <div class="bg-gray-50 px-6 py-4 text-right">
+                    <a href="{{ route('events') }}" class="text-sm font-medium text-verde-profundo hover:underline">Ver
+                        todos los eventos </a>
                 </div>
-        </section>
+            </div>
+
+            <div class="bg-white rounded shadow-lg overflow-hidden transform transition hover:scale-105 duration-500">
+                <div class="bg-amarillo-oscuro p-4">
+                    <div class="flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="size-7 mr-1" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                        </svg>
+                        <h2 class="text-xl font-bold">Tareas del Huerto</h2>
+                    </div>
+                </div>
+                <div class="p-6 h-96 overflow-y-auto">
+                    @if ($tasks->isEmpty())
+                        <div class="flex flex-col items-center justify-center h-full text-gris-profundo">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mb-4 text-gray-400" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                            </svg>
+                            <p class="text-lg">No hay tareas pendientes</p>
+                        </div>
+                    @else
+                        <div class="space-y-3">
+                            @foreach ($tasks as $task)
+                                <div
+                                    class="p-3 rounded-lg border {{ is_null($task->completed_date) ? 'bg-yellow-50 border-yellow-200' : 'bg-green-50 border-green-200' }}">
+                                    <div class="flex items-start">
+                                        <div class="flex-shrink-0 pt-1">
+                                            @if (is_null($task->completed_date))
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-500"
+                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                            @else
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500"
+                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M5 13l4 4L19 7" />
+                                                </svg>
+                                            @endif
+                                        </div>
+                                        <div class="ml-3 flex-1">
+                                            <p
+                                                class="text-sm font-medium text-gray-900 {{ !is_null($task->completed_date) ? 'line-through' : '' }}">
+                                                {{ $task->task_name }}
+                                            </p>
+                                            @if (!is_null($task->completed_date))
+                                                <p class="text-xs text-green-600 mt-1">
+                                                    Completada el
+                                                    {{ \Carbon\Carbon::parse($task->completed_date)->format('d/m/Y') }}
+                                                </p>
+                                            @else
+                                                <p class="text-xs text-yellow-600 mt-1">Pendiente</p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+                <div class="bg-gray-50 px-6 py-4 text-right">
+                    <a href="{{ route('myplot') }}" class="text-sm font-medium text-verde-profundo hover:underline">Ver
+                        todas las tareas </a>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-r shadow-lg overflow-hidden transform transition hover:scale-105 duration-500">
+                <div class="bg-red-400 p-4">
+                    <div class="flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="size-7 mr-1" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                        </svg>
+                        <h2 class="text-xl font-bold ">Resumen de Actividad</h2>
+                    </div>
+                </div>
+                <div class="p-6 h-96">
+                    <div class="space-y-6">
+                        <div class="flex flex-col space-y-6">
+                            <div class="bg-verde-claro p-4 rounded-lg text-center">
+                                <p class="text-3xl font-bold text-verde-profundo">{{ count($events) }}</p>
+                                <p class="text-sm text-gray-600">Eventos</p>
+                            </div>
+                            <div class="bg-yellow-50 p-4 rounded-lg text-center">
+                                <p class="text-3xl font-bold text-yellow-600">
+                                    {{ $tasks->whereNull('completed_date')->count() }}</p>
+                                <p class="text-sm text-gray-600">Tareas pendientes</p>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 px-6 py-4 text-right">
+                            <a href="{{ route('calendar') }}"
+                                class="text-sm font-medium text-verde-profundo hover:underline">Ver
+                                el calendario </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </main>
 @endsection

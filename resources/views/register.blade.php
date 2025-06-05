@@ -20,32 +20,32 @@
                 @csrf
                 <div class="mb-4">
                     <label class="block text-gray-700">Nombre</label>
-                    <input type="text" name="name" class="w-full p-2 border rounded" value="{{ old('name') }}" required>
+                    <input type="text" name="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition duration-200 outline-none" value="{{ old('name') }}" required>
                 </div>
     
                 <div class="mb-4">
                     <label class="block text-gray-700">Email</label>
-                    <input type="email" name="email" class="w-full p-2 border rounded" value="{{ old('email') }}" required>
+                    <input type="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition duration-200 outline-none" value="{{ old('email') }}" required>
                 </div>
     
                 <div class="mb-4">
                     <label class="block text-gray-700">Teléfono</label>
-                    <input type="text" name="phone_number" class="w-full p-2 border rounded" value="{{ old('phone_number') }}">
+                    <input type="text" name="phone_number" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition duration-200 outline-none" value="{{ old('phone_number') }}">
                 </div>
     
                 <div class="mb-4">
                     <label class="block text-gray-700">Código de parcela</label>
-                    <input type="text" name="plot_code" class="w-full p-2 border rounded" required>
+                    <input type="text" name="plot_code" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition duration-200 outline-none" required>
                 </div>
     
                 <div class="mb-4">
                     <label class="block text-gray-700">Contraseña</label>
-                    <input type="password" name="password" class="w-full p-2 border rounded" required>
+                    <input type="password" name="password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition duration-200 outline-none" required>
                 </div>
     
                 <div class="mb-4">
                     <label class="block text-gray-700">Confirmar Contraseña</label>
-                    <input type="password" name="password_confirmation" class="w-full p-2 border rounded" required>
+                    <input type="password" name="password_confirmation" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition duration-200 outline-none" required>
                 </div>
     
                 <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
