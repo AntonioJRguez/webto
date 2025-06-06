@@ -2,9 +2,9 @@
 @section('content')
     <!-- Contenido para probar el scroll -->
 
-    <section id="inicio" class="flex justify-center items-center">
-        <div class="bg-white p-8 rounded-lg shadow-lg w-auto">
-            <h2 class="text-2xl font-bold text-center mb-4">Registro</h2>
+    <section id="inicio" class="flex justify-center items-center m-4">
+        <div class="bg-white p-8 rounded-lg shadow-lg w-full sm:w-[50%] md:w-[30%] ">
+            <h2 class="text-2xl font-bold text-center mb-4">Regístrate</h2>
     
             @if ($errors->any())
                 <div class="mb-4 p-2 bg-red-200 text-red-700 rounded">

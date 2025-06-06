@@ -16,7 +16,7 @@
 </head>
 
 <body class="circle-pattern">
-    <div class="z-50 bg-verde-claro">
+    <div class="z-50 bg-gradient-to-r from-white via-[#e3dba0] to-white border-b-[6px] border-white/20 backdrop-blur-md">
         <!-- Header de la página -->
         <header class="top-0 left-0 w-full h-[120px]  ">
             <div class="container mx-auto flex items-center justify-center px-4 py-2 belittle">

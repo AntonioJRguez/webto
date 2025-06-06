@@ -1,6 +1,6 @@
 @extends('layouts.app-session')
 @section('content')
-    <main class="mt-20 flex-grow flex flex-col items-center h-full w-full">
+    <main class="mt-20 flex-grow flex flex-col items-center h-full min-h-screen w-full">
         <div class="flex flex-col w-[95%] md:w-[80%] h-full bg-gris-claro rounded-lg p-3 m-2">
             <div class="w-full flex justify-center">
                 <h1 class="text-6xl font-extrabold text-gris-profundo climate">

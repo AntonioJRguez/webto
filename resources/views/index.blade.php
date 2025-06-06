@@ -31,7 +31,7 @@
         class="h-screen bg-verde-claro flex flex-col md:flex-row-reverse justify-center items-center px-8 gap-8">
         <div class="max-w-md text-center md:text-left">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-800 climate mb-6">
-                Apúntate a los eventos de tu comunidad <span class="text-verde-oscuro">y propón nuevos</span>.
+                Apúntate a los eventos de tu comunidad y propón nuevos.
             </h2>
         </div>
         <div>
@@ -50,18 +50,18 @@
             <form action="{{ route('loginUser') }}" method="POST">
                 @csrf
                 <div class="mb-4">
-                    <label for="email" class="block text-gray-700">Correo Electrónico</label>
+                    <label for="email" class="block text-gris-oscuro">Correo Electrónico</label>
                     <input type="email" name="email" id="email" required
                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition duration-200 outline-none">
                 </div>
 
                 <div class="mb-4">
-                    <label for="password" class="block text-gray-700">Contraseña</label>
+                    <label for="password" class="block text-gris-oscuro">Contraseña</label>
                     <input type="password" name="password" id="password" required
                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition duration-200 outline-none">
                 </div>
 
-                <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                <button type="submit" class="w-full bg-verde-oscuro hover:bg-verde-medio text-white font-bold py-2 px-4 rounded">
                     Iniciar Sesión
                 </button>
             </form>
@@ -87,18 +87,18 @@
             <form action="{{ route('loginAdmin') }}" method="POST">
                 @csrf
                 <div class="mb-4">
-                    <label for="email" class="block text-gray-700">Correo Electrónico</label>
-                    <input type="email" name="email" id="email" required
+                    <label for="email" class="block text-gris-oscuro">Correo Electrónico</label>
+                    <input type="email" name="email" id="email2" required
                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition duration-200 outline-none">
                 </div>
 
                 <div class="mb-4">
-                    <label for="password" class="block text-gray-700">Contraseña</label>
-                    <input type="password" name="password" id="password" required
+                    <label for="password" class="block text-gris-oscuro">Contraseña</label>
+                    <input type="password" name="password" id="password2" required
                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition duration-200 outline-none">
                 </div>
 
-                <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                <button type="submit" class="w-full bg-verde-profundo hover:bg-verde-medio text-white font-bold py-2 px-4 rounded">
                     Iniciar Sesión
                 </button>
             </form>

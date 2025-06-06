@@ -223,7 +223,7 @@
                             d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                     </svg>
                 </h3>
-                <div class="flex gap-6 px-4 py-2 overflow-x-auto m-4 bg-amarillo-claro">
+                <div class="flex gap-6 px-4 py-2 overflow-x-auto m-4 border-4 border-gris-claro rounded-sm bg-amarillo-claro">
                     @if (empty($pastTasks))
                         <div class="flex h-20 items-center justify-center">
                             <p>No hay ninguna tarea pendiente.</p>
@@ -258,7 +258,7 @@
                     </svg>
                 </h3>
 
-                <div class="flex gap-6 px-4 py-2 overflow-x-auto m-4 bg-verde-claro">
+                <div class="flex gap-6 px-4 py-2 overflow-x-auto m-4 border-4 border-gris-claro rounded-sm  bg-verde-claro">
                     @if (empty($completedTasks))
                         <div class="flex h-20 items-center justify-center">
                             <p>No hay ninguna tarea realizada.</p>

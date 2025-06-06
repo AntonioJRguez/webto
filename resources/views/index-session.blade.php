@@ -145,23 +145,30 @@
                 <div class="p-6 h-96">
                     <div class="space-y-6">
                         <div class="flex flex-col space-y-6">
-                            <div class="bg-verde-claro p-4 rounded-lg text-center">
-                                <p class="text-3xl font-bold text-verde-profundo">{{ count($events) }}</p>
-                                <p class="text-sm text-gray-600">Eventos</p>
+                            <div class="bg-red-100 p-4 rounded-lg text-center">
+                                <p class="text-3xl font-bold text-red-600">{{ count($events) }}</p>
+                                <p class="text-sm text-red-600">Eventos</p>
                             </div>
                             <div class="bg-yellow-50 p-4 rounded-lg text-center">
                                 <p class="text-3xl font-bold text-yellow-600">
                                     {{ $tasks->whereNull('completed_date')->count() }}</p>
                                 <p class="text-sm text-gray-600">Tareas pendientes</p>
                             </div>
+                            <div class="bg-verde-claro p-4 rounded-lg text-center">
+                                <p class="text-3xl font-bold text-verde-profundo">
+                                    {{ $tasks->whereNotNull('completed_date')->count() }}</p>
+                                <p class="text-sm text-gray-600">Tareas completadas</p>
+                            </div>
                         </div>
-                        <div class="bg-gray-50 px-6 py-4 text-right">
-                            <a href="{{ route('calendar') }}"
-                                class="text-sm font-medium text-verde-profundo hover:underline">Ver
-                                el calendario </a>
-                        </div>
+
                     </div>
+                    
                 </div>
+                <div class="bg-gray-50 px-6 py-4 text-right">
+                        <a href="{{ route('calendar') }}"
+                            class="text-sm font-medium text-verde-profundo hover:underline">Ver
+                            el calendario </a>
+                    </div>
             </div>
         </div>
 

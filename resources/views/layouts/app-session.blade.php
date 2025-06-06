@@ -44,7 +44,7 @@
     <nav class="fixed top-0 left-0 w-full bg-gradient-to-r from-green-700 via-green-500 to-yellow-400 shadow-lg z-50">
         <div class="container mx-auto flex items-center justify-between px-4 py-3 relative">
 
-            <a href="#" class="flex items-center space-x-2">
+            <a href="{{ route('index') }}" class="flex items-center space-x-2">
                 <img src="{{ asset('images/webtologo.png') }}" alt="Logo" class="h-10">
             </a>
 
