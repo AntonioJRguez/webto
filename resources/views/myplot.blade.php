@@ -93,6 +93,57 @@
                 })
                 .catch(err => console.error('Error:', err));
         };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const taskItems = document.querySelectorAll('.task-item');
+
+            taskItems.forEach(item => {
+                const header = item.querySelector('.task-header');
+                const buttons = item.querySelector('.task-buttons');
+                const arrow = item.querySelector('.task-arrow');
+
+                if (window.innerWidth < 640) {
+                    buttons.style.maxHeight = '0';
+                    buttons.style.opacity = '0';
+                }
+
+                header.addEventListener('click', function() {
+                    if (window.innerWidth >= 640) return;
+
+                    const isExpanded = buttons.style.maxHeight !== '0px';
+
+                    if (isExpanded) {
+                        buttons.style.maxHeight = '0';
+                        buttons.style.opacity = '0';
+                        arrow.style.transform = 'rotate(0deg)';
+                    } else {
+                        buttons.style.maxHeight = buttons.scrollHeight + 'px';
+                        buttons.style.opacity = '1';
+                        arrow.style.transform = 'rotate(180deg)';
+                    }
+                });
+            });
+
+            window.addEventListener('resize', function() {
+                const taskItems = document.querySelectorAll('.task-item');
+                const isMobile = window.innerWidth < 640;
+
+                taskItems.forEach(item => {
+                    const buttons = item.querySelector('.task-buttons');
+                    const arrow = item.querySelector('.task-arrow');
+
+                    if (isMobile) {
+                        buttons.style.maxHeight = '0';
+                        buttons.style.opacity = '0';
+                        arrow.style.transform = 'rotate(0deg)';
+                    } else {
+                        buttons.style.maxHeight = '';
+                        buttons.style.opacity = '';
+                        arrow.style.transform = '';
+                    }
+                });
+            });
+        });
     </script>
 
     <main class="m-2 flex justify-center pt-20">
@@ -166,7 +217,7 @@
                             </svg>
                             Tareas próximas</h3>
 
-                        <ul class="flex flex-col gap-5 text-sm">
+                        {{-- <ul class="flex flex-col gap-5 text-sm">
 
                             @foreach ($futureTasks as $nextTask)
                                 <div class="flex flex-col sm:flex-row gap-2 items-center">
@@ -182,6 +233,43 @@
                                             class="bg-red-400 hover:bg-red-500 p-1 rounded-lg">Eliminar</button>
                                         <button onclick="moveTaskToYesterday({{ $nextTask['id'] }})"
                                             class="bg-blue-400 hover:bg-blue-500 p-1 rounded-lg">Para hoy</button>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </ul> --}}
+
+                        <ul class="flex flex-col gap-5 text-sm" id="tasks-container">
+                            @foreach ($futureTasks as $nextTask)
+                                <div class="flex flex-col sm:flex-row gap-2 items-center task-item"
+                                    data-task-id="{{ $nextTask['id'] }}">
+                                    <div class="flex gap-1 w-full sm:w-auto cursor-pointer task-header">
+                                        <p class="px-2 py-1 text-xs bg-amarillo-oscuro border-gris-medio w-12">
+                                            {{ date('d-m', strtotime($nextTask['limit_date'])) }}
+                                        </p>
+                                        <span class="flex-1">{{ $nextTask['task_name'] }}</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor"
+                                            class="size-5 ml-auto sm:hidden transition-transform duration-300 task-arrow">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                        </svg>
+                                    </div>
+                                    <div
+                                        class="flex flex-col sm:flex-row gap-1 w-full sm:w-auto overflow-hidden transition-all duration-300 ease-in-out task-buttons">
+                                        <a href="{{ route('edit.task', ['task' => $nextTask['id']]) }}">
+                                            <button
+                                                class="bg-amarillo-claro hover:bg-amarillo-medio sm:px-2 sm:py-1 px-4 py-2 rounded-lg w-full sm:w-auto  flex items-center justify-center">
+                                                Editar
+                                            </button>
+                                        </a>
+                                        <button onclick="showModalDeleteTask({{ $nextTask['id'] }})"
+                                            class="bg-red-400 hover:bg-red-500 sm:px-2 sm:py-1 px-4 py-2 rounded-lg w-full sm:w-auto  flex items-center justify-center">
+                                            Eliminar
+                                        </button>
+                                        <button onclick="moveTaskToYesterday({{ $nextTask['id'] }})"
+                                            class="bg-blue-400 hover:bg-blue-500 sm:px-2 sm:py-1 px-4 py-2 rounded-lg w-full sm:w-auto  flex items-center justify-center">
+                                            Para hoy
+                                        </button>
                                     </div>
                                 </div>
                             @endforeach
@@ -223,7 +311,8 @@
                             d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                     </svg>
                 </h3>
-                <div class="flex gap-6 px-4 py-2 overflow-x-auto m-4 border-4 border-gris-claro rounded-sm bg-amarillo-claro">
+                <div
+                    class="flex gap-6 px-4 py-2 overflow-x-auto m-4 border-4 border-gris-claro rounded-sm bg-amarillo-claro">
                     @if (empty($pastTasks))
                         <div class="flex h-20 items-center justify-center">
                             <p>No hay ninguna tarea pendiente.</p>
@@ -258,7 +347,8 @@
                     </svg>
                 </h3>
 
-                <div class="flex gap-6 px-4 py-2 overflow-x-auto m-4 border-4 border-gris-claro rounded-sm  bg-verde-claro">
+                <div
+                    class="flex gap-6 px-4 py-2 overflow-x-auto m-4 border-4 border-gris-claro rounded-sm  bg-verde-claro">
                     @if (empty($completedTasks))
                         <div class="flex h-20 items-center justify-center">
                             <p>No hay ninguna tarea realizada.</p>
@@ -326,9 +416,10 @@
                 <article
                     class="bg-white select-none p-4 rounded-xl text-lg font-bold shadow-md border border-verde-oscuro hover:bg-verde-claro  flex justify-center items-center cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="size-6 mr-1">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                        </svg><h3>
+                        stroke="currentColor" class="size-6 mr-1">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
+                    <h3>
                         Añadir cultivo </h3>
                 </article>
             </a>

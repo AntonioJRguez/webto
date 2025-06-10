@@ -41,7 +41,7 @@
                 </svg>
             </button>
             <ul id="nav-menu"
-                class="hidden absolute top-full right-0 mt-1 w-56 bg-white rounded-lg shadow-xl border border-gray-100 py-1 text-gray-700 font-medium overflow-hidden lg:static lg:flex lg:flex-row lg:space-x-4 lg:space-y-0 lg:items-center lg:bg-transparent lg:shadow-none lg:border-0 lg:py-0 lg:w-auto">
+                class="hidden absolute top-full right-1 mt-1 w-56 bg-white rounded-lg shadow-xl border border-gray-100 py-1 text-gray-700 font-medium overflow-hidden lg:static lg:flex lg:flex-row lg:space-x-4 lg:space-y-0 lg:items-center lg:bg-transparent lg:shadow-none lg:border-0 lg:py-0 lg:w-auto">
                 <li><a href="#inicio"
                         class="block px-4 py-3 hover:bg-gray-50 transition-colors duration-200 lg:hover:bg-transparent lg:hover:text-gray-300">Inicio</a>
                 </li>

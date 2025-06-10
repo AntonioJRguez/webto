@@ -135,14 +135,30 @@ class HomeController extends Controller
     public function createTask(Request $request)
     {
         if (Auth::check()) {
+            $mp = [
+                'task_name.required' => 'El nombre de la tarea es obligatorio',
+                'task_name.string' => 'El nombre debe ser texto',
+                'task_name.max' => 'El nombre no debe exceder los 255 caracteres',
+                'task_name.min' => 'El nombre debe tener al menos 4 caracteres',
 
+                'description.required' => 'La descripción es obligatoria',
+                'description.string' => 'La descripción debe ser texto',
+                'description.max' => 'La descripción no debe exceder los 255 caracteres',
+                'description.min' => 'La descripción debe tener al menos 4 caracteres',
+
+                'limit_date.required' => 'La fecha límite es obligatoria',
+                'limit_date.date' => 'Debe ingresar una fecha válida',
+
+                'periodicity.required' => 'La periodicidad es obligatoria',
+                'periodicity.integer' => 'La periodicidad debe ser un número entero'
+            ];
 
             $validated = $request->validate([
-                'task_name' => 'required|string|max:255',
-                'description' => 'required|string',
+                'task_name' => 'required|string|max:255|min:4',
+                'description' => 'required|string|max:255|min:4',
                 'limit_date' => 'required|date',
                 'periodicity' => 'required|integer',
-            ]);
+            ],$mp);
 
             $user = Auth::user();
             $plotId = $user->plot->id;
@@ -187,6 +203,7 @@ class HomeController extends Controller
             'name.required' => 'El nombre del cultivo es obligatorio.',
             'name.string' => 'El nombre debe ser texto.',
             'name.max' => 'El nombre no puede exceder los 255 caracteres.',
+             'name.min' => 'El nombre tiene que ser de mínimo 4 caracteres.',
             'description.required' => 'La descripción es obligatoria.',
             'description.string' => 'La descripción debe ser texto.',
             'description.max' => 'La descripción no puede exceder los 255 caracteres.',
@@ -199,8 +216,8 @@ class HomeController extends Controller
         ];
 
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
+            'name' => 'required|string|max:255|min:4',
+            'description' => 'required|string|max:255|min:4',
             'status' => 'required|in:sowed,harvestable',
             'harvest_date' => 'required|date',
             'sowing_date' => 'required|date'
@@ -247,14 +264,30 @@ class HomeController extends Controller
     public function updateTask(Request $request, $id)
     {
         if (Auth::check()) {
+$mp = [
+                'task_name.required' => 'El nombre de la tarea es obligatorio',
+                'task_name.string' => 'El nombre debe ser texto',
+                'task_name.max' => 'El nombre no debe exceder los 255 caracteres',
+                'task_name.min' => 'El nombre debe tener al menos 4 caracteres',
 
+                'description.required' => 'La descripción es obligatoria',
+                'description.string' => 'La descripción debe ser texto',
+                'description.max' => 'La descripción no debe exceder los 255 caracteres',
+                'description.min' => 'La descripción debe tener al menos 4 caracteres',
+
+                'limit_date.required' => 'La fecha límite es obligatoria',
+                'limit_date.date' => 'Debe ingresar una fecha válida',
+
+                'periodicity.required' => 'La periodicidad es obligatoria',
+                'periodicity.integer' => 'La periodicidad debe ser un número entero'
+            ];
 
             $validated = $request->validate([
-                'name' => 'required|string|max:255',
-                'description' => 'required|string',
+                'task_name' => 'required|string|max:255|min:4',
+                'description' => 'required|string|max:255|min:4',
                 'limit_date' => 'required|date',
                 'periodicity' => 'required|integer',
-            ]);
+            ], $mp);
 
             $task = Task::findOrFail($id);
             $user = Auth::user();
@@ -262,7 +295,8 @@ class HomeController extends Controller
 
             $wasPeriodic = $task->is_periodic;
             $oldTask = clone $task;
-            $task->task_name = $request->name;
+            $task->task_name = $request->task_name;
+            $task->description = $request->description;
             $task->limit_date = $request->limit_date;
             $task->is_periodic = ($request->periodicity > 0);
             $task->time_period = $request->periodicity > 0 ? $request->periodicity : null;
@@ -485,6 +519,7 @@ class HomeController extends Controller
             $mp = [
                 'name.required' => 'El nombre del cultivo es obligatorio.',
                 'name.string' => 'El nombre debe ser texto.',
+                'name.min' => 'El nombre tiene que ser de mínimo 4 caracteres.',
                 'name.max' => 'El nombre no puede exceder los 255 caracteres.',
                 'description.required' => 'La descripción es obligatoria.',
                 'description.string' => 'La descripción debe ser texto.',
@@ -498,8 +533,8 @@ class HomeController extends Controller
             ];
 
             $validated = $request->validate([
-                'name' => 'required|string|max:255',
-                'description' => 'required|string|max:255',
+                'name' => 'required|string|max:255|min:4',
+                'description' => 'required|string|max:255|min:4',
                 'status' => 'required|in:sowed,harvestable',
                 'harvest_date' => 'required|date',
                 'sowing_date' => 'required|date'
