@@ -7,6 +7,7 @@ use App\Models\Plot;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Validation\Rules\Password as RulesPassword;
 
 class RegisterController extends Controller
 {
@@ -47,7 +48,7 @@ class RegisterController extends Controller
             'password' => [
                 'required',
                 'confirmed',
-                Password::min(8)
+                RulesPassword::min(8)
                     ->letters()
                     ->mixedCase()
                     ->numbers()
