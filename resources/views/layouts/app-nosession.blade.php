@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     @vite('resources/css/app.css')
     {{-- <script src="{{ asset('js/script.js') }}"></script> --}}
-
+<title>Webto</title>
 
 </head>
 

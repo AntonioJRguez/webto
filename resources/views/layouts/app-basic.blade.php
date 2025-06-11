@@ -12,7 +12,7 @@
     {{-- <script>
         window.routeTemplate = @json(route('admin.update.user', ':id'));
     </script> --}}
-
+<title>Webto</title>
 </head>
 
 <body class="circle-pattern">

@@ -27,7 +27,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
     @vite('resources/css/app.css')
     {{-- <script src="{{ asset('js/script.js') }}"></script> --}}
-
+<title>Webto</title>
 </head>
 
 <body class="circle-pattern">
