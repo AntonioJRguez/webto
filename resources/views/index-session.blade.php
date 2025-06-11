@@ -36,7 +36,7 @@
                                         @if (!is_null($event->image_id))
                                             <div class="flex-shrink-0 mr-4">
                                                 <x-cloudinary::image public-id="{{ $event->image_id }}"
-                                                    class="h-16 w-16 rounded-md object-cover" />
+                                                    class="h-16 w-16 rounded-md object-cover"  alt="image-event"/>
                                             </div>
                                         @endif
                                         <div>
