@@ -17,7 +17,7 @@
 @endphp
 
 <!doctype html>
-<html class="!scroll-smooth">
+<html lang="es" class="!scroll-smooth">
 
 <head>
     <meta charset="utf-8">
